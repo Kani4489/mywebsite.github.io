@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terranex Technologies | Geospatial, Defense & PNT Solutions</title>
+    <meta name="description" content="Terranex Technologies specializes in Geospatial Solutions, GNSS Positioning, Defense Electronics, Timing & Synchronization Systems, and Mission-Critical Infrastructure.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+    <!-- Header / Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <span>TERRANEX</span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#verticals" class="nav-link">Verticals</a>
+                <a href="#command-center" class="nav-link">PNT Hub</a>
+                <a href="#industries" class="nav-link">Industries</a>
+                <a href="#contact" class="nav-link nav-btn-mobile">Contact Us</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-outline nav-cta">Get in Touch</a>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <!-- Interactive Background Canvas -->
+        <canvas id="hero-canvas" class="hero-canvas"></canvas>
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="badge fade-in">
+                    <span class="badge-dot"></span>
+                    <span class="badge-text">50+ Years Combined Industry Experience</span>
+                </div>
+                <h1 class="hero-title fade-in delay-1">
+                    Engineering Precision.<br>
+                    <span class="text-gradient">Enabling Decisions.</span><br>
+                    Securing the Future.
+                </h1>
+                <p class="hero-description fade-in delay-2">
+                    Terranex Technologies Private Limited delivers innovative, reliable, and indigenous technologies spanning Geospatial Solutions, Positioning & Navigation, Defense Electronics, and Mission-Critical Infrastructure.
+                </p>
+                <div class="hero-actions fade-in delay-3">
+                    <a href="#verticals" class="btn btn-primary">
+                        <span>Explore Our Solutions</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#about" class="btn btn-secondary">
+                        <span>Learn More</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hero Scroll Indicator -->
+        <div class="scroll-indicator">
+            <a href="#about">
+                <span class="mouse">
+                    <span class="wheel"></span>
+                </span>
+                <span class="arrow"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Corporate Profile</span>
+                <h2 class="section-title">Who We Are</h2>
+                <div class="section-underline"></div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text-col scroll-reveal">
+                    <p class="lead-text">
+                        Terranex Technologies Private Limited is a specialized engineering and technology company focused on delivering advanced solutions across mission-critical domains.
+                    </p>
+                    <p class="body-text">
+                        Our team comprises experienced professionals, technologists, and defense industry veterans who collectively bring more than five decades of practical experience. We combine deep domain knowledge with emerging technologies to create solutions that enhance operational efficiency, improve decision-making, and support national technological self-reliance.
+                    </p>
+                    
+                    <!-- Vision & Mission Tabs -->
+                    <div class="tabs-container">
+                        <div class="tab-headers">
+                            <button class="tab-btn active" data-tab="vision">Our Vision</button>
+                            <button class="tab-btn" data-tab="mission">Our Mission</button>
+                        </div>
+                        <div class="tab-contents">
+                            <div class="tab-pane active" id="vision">
+                                <p>To become a globally recognized technology leader in Geospatial Intelligence, Positioning Systems, Defense Electronics, and Critical Infrastructure Solutions by delivering innovative, reliable, and indigenous technologies that contribute to national development, security, and sustainable growth.</p>
+                            </div>
+                            <div class="tab-pane" id="mission">
+                                <ul class="mission-list">
+                                    <li><i class="fas fa-check-circle"></i> To design and deliver world-class geospatial and defense technology solutions.</li>
+                                    <li><i class="fas fa-check-circle"></i> To enable customers with accurate, reliable, and actionable intelligence.</li>
+                                    <li><i class="fas fa-check-circle"></i> To support national self-reliance through indigenous technology development.</li>
+                                    <li><i class="fas fa-check-circle"></i> To foster innovation through continuous research and engineering excellence.</li>
+                                    <li><i class="fas fa-check-circle"></i> To build long-term partnerships based on trust, quality, and customer success.</li>
+                                    <li><i class="fas fa-check-circle"></i> To create sustainable value for stakeholders through technology leadership and operational excellence.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-stats-col scroll-reveal">
+                    <h3 class="strengths-title">Why Terranex?</h3>
+                    <div class="strengths-grid">
+                        <div class="strength-card">
+                            <div class="strength-icon"><i class="fas fa-users"></i></div>
+                            <p class="strength-text">50+ Years of Combined Industry Experience</p>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon"><i class="fas fa-shield-halved"></i></div>
+                            <p class="strength-text">Strong Expertise in Geospatial & Defense Technologies</p>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon"><i class="fas fa-microchip"></i></div>
+                            <p class="strength-text">Indigenous Product Development Capabilities</p>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon"><i class="fas fa-cubes"></i></div>
+                            <p class="strength-text">End-to-End System Integration Expertise</p>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon"><i class="fas fa-building-columns"></i></div>
+                            <p class="strength-text">Government & Enterprise Project Experience</p>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon"><i class="fas fa-award"></i></div>
+                            <p class="strength-text">Focus on Quality, Reliability, and Innovation</p>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon"><i class="fas fa-handshake"></i></div>
+                            <p class="strength-text">Long-Term Customer Partnership Approach</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Verticals Bento Grid -->
+    <section class="verticals-section" id="verticals">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Core Competencies</span>
+                <h2 class="section-title">Our Business Verticals</h2>
+                <div class="section-underline"></div>
+                <p class="section-subtitle">
+                    We deliver advanced engineering solutions grouped across four primary technological domains.
+                </p>
+            </div>
+
+            <!-- Bento Grid Layout -->
+            <div class="bento-grid">
+                <!-- Vertical 1: Geospatial Solutions (Big Card) -->
+                <div class="bento-card card-large scroll-reveal">
+                    <div class="card-bg-glow color-cyan"></div>
+                    <div class="card-content">
+                        <div class="card-header-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-title">Geospatial Solutions</h3>
+                            <p class="card-description">
+                                Delivering advanced geospatial technologies that enable precise positioning, mapping, surveying, and location intelligence for government, infrastructure, agriculture, mining, and utility sectors.
+                            </p>
+                            <div class="tag-container">
+                                <span class="tag">GNSS Receivers</span>
+                                <span class="tag">RTK Systems</span>
+                                <span class="tag">DGPS Solutions</span>
+                                <span class="tag">Drone Survey</span>
+                                <span class="tag">CORS Infrastructure</span>
+                                <span class="tag">Utility Mapping</span>
+                            </div>
+                            <button class="btn btn-link vertical-explore-btn" data-vertical="geospatial">
+                                <span>View Full Capabilities</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vertical 2: Defense & Aerospace Technologies -->
+                <div class="bento-card card-medium scroll-reveal">
+                    <div class="card-bg-glow color-blue"></div>
+                    <div class="card-content">
+                        <div class="card-header-icon">
+                            <i class="fas fa-fighter-jet"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-title">Defense & Aerospace</h3>
+                            <p class="card-description">
+                                Mission-critical technologies and specialized engineering solutions supporting aerospace and strategic defense applications.
+                            </p>
+                            <div class="tag-container">
+                                <span class="tag">Defense Electronics</span>
+                                <span class="tag">Tactical Comms</span>
+                                <span class="tag">Sensor Fusion</span>
+                            </div>
+                            <button class="btn btn-link vertical-explore-btn" data-vertical="defense">
+                                <span>Explore Capabilities</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vertical 3: Positioning, Navigation & Timing (PNT) -->
+                <div class="bento-card card-medium scroll-reveal">
+                    <div class="card-bg-glow color-emerald"></div>
+                    <div class="card-content">
+                        <div class="card-header-icon">
+                            <i class="fas fa-satellite"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3 class="card-title">Positioning, Navigation & Timing</h3>
+                            <p class="card-description">
+                                Multi-constellation GNSS receiver setups and microsecond-accurate time servers forming the backbone of infrastructure.
+                            </p>
+                            <div class="tag-container">
+                                <span class="tag">NTP/PTP Timing</span>
+                                <span class="tag">Frequency Servers</span>
+                                <span class="tag">GNSS Systems</span>
+                            </div>
+                            <button class="btn btn-link vertical-explore-btn" data-vertical="pnt">
+                                <span>Explore Systems</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vertical 4: Defense Testing & Monitoring Products (Wide Card) -->
+                <div class="bento-card card-wide scroll-reveal">
+                    <div class="card-bg-glow color-purple"></div>
+                    <div class="card-content">
+                        <div class="card-header-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-info-row">
+                            <div class="info-main">
+                                <h3 class="card-title">Defense Testing & Monitoring</h3>
+                                <p class="card-description">
+                                    Sophisticated testing instrumentation, industrial display architectures, process safety equipment, and furnace thermal monitoring solutions engineered for high-stress defense environments.
+                                </p>
+                            </div>
+                            <div class="info-side">
+                                <div class="tag-container">
+                                    <span class="tag">Upper Air Sounding</span>
+                                    <span class="tag">Weather Stations</span>
+                                    <span class="tag">Thermal Cameras</span>
+                                    <span class="tag">Signal Converters</span>
+                                </div>
+                                <button class="btn btn-link vertical-explore-btn" data-vertical="testing">
+                                    <span>Browse Products</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulation Hub / Command Center -->
+    <section class="command-center-section" id="command-center">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Interactive Demo</span>
+                <h2 class="section-title">Terranex PNT Command Center</h2>
+                <div class="section-underline"></div>
+                <p class="section-subtitle">
+                    Interact with real-time simulated telemetry demonstrating our positioning precision, time synchronization, and environmental monitoring calculations.
+                </p>
+            </div>
+
+            <div class="simulation-dashboard scroll-reveal">
+                <div class="dash-sidebar">
+                    <button class="dash-tab-btn active" data-sim="satellite">
+                        <i class="fas fa-satellite"></i>
+                        <div class="btn-text">
+                            <h4>GNSS Satellite Orbit</h4>
+                            <p>Active Triangulation & DOP</p>
+                        </div>
+                    </button>
+                    <button class="dash-tab-btn" data-sim="timing">
+                        <i class="fas fa-clock"></i>
+                        <div class="btn-text">
+                            <h4>NTP/PTP Timing Sync</h4>
+                            <p>Precision Server Drift Logs</p>
+                        </div>
+                    </button>
+                    <button class="dash-tab-btn" data-sim="weather">
+                        <i class="fas fa-cloud-sun-rain"></i>
+                        <div class="btn-text">
+                            <h4>Atmospheric Telemetry</h4>
+                            <p>Sounding Sonde Mock Feed</p>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="dash-viewport">
+                    <!-- Simulation 1: Satellite Orbit Triangulation -->
+                    <div class="sim-pane active" id="sim-satellite">
+                        <div class="pane-header">
+                            <div class="pane-title">
+                                <span class="pulse-dot green"></span>
+                                <h3>GNSS Triangulation & Active Constellations</h3>
+                            </div>
+                            <div class="pane-actions">
+                                <label for="constellation-select">Constellation: </label>
+                                <select id="constellation-select" class="dash-select">
+                                    <option value="all">Multi-Constellation (All)</option>
+                                    <option value="gps">GPS (USA)</option>
+                                    <option value="navic">NavIC (India)</option>
+                                    <option value="galileo">Galileo (EU)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pane-body split">
+                            <div class="canvas-container">
+                                <canvas id="satellite-orbit-canvas"></canvas>
+                            </div>
+                            <div class="telemetry-info">
+                                <div class="telemetry-card">
+                                    <span class="tel-label">Active Satellites</span>
+                                    <span class="tel-value" id="sat-count">12</span>
+                                </div>
+                                <div class="telemetry-card">
+                                    <span class="tel-label">HDOP (Horizontal Precision)</span>
+                                    <span class="tel-value text-green" id="hdop-val">0.82</span>
+                                </div>
+                                <div class="telemetry-card">
+                                    <span class="tel-label">Triangulated Latitude</span>
+                                    <span class="tel-value font-mono" id="lat-val">12° 58' 23" N</span>
+                                </div>
+                                <div class="telemetry-card">
+                                    <span class="tel-label">Triangulated Longitude</span>
+                                    <span class="tel-value font-mono" id="lon-val">80° 14' 56" E</span>
+                                </div>
+                                <div class="telemetry-status">
+                                    <i class="fas fa-circle-check text-green"></i>
+                                    <span>PNT Triangulation Lock: SECURE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulation 2: Timing Sync Drift Log -->
+                    <div class="sim-pane" id="sim-timing">
+                        <div class="pane-header">
+                            <div class="pane-title">
+                                <span class="pulse-dot cyan"></span>
+                                <h3>Precision PTP/NTP Clock Synchronization</h3>
+                            </div>
+                            <div class="pane-actions">
+                                <button class="btn btn-sm btn-outline" id="reset-drift-btn">Reset Stats</button>
+                            </div>
+                        </div>
+                        <div class="pane-body">
+                            <div class="clock-display-row">
+                                <div class="large-clock">
+                                    <div class="clock-title">PTP Timing Server (Master)</div>
+                                    <div class="clock-time font-mono" id="master-clock">12:34:56.000000000</div>
+                                </div>
+                                <div class="clock-stats">
+                                    <div class="timing-stat">
+                                        <div class="stat-small-label">Mean Path Delay</div>
+                                        <div class="stat-small-value font-mono">1.24 µs</div>
+                                    </div>
+                                    <div class="timing-stat">
+                                        <div class="stat-small-label">Current Offset</div>
+                                        <div class="stat-small-value font-mono text-cyan" id="clock-offset">< 8 ns</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="log-console">
+                                <div class="console-header">
+                                    <i class="fas fa-terminal"></i>
+                                    <span>PTP Core Engine - Timing Sync Logs (Live)</span>
+                                </div>
+                                <div class="console-body" id="timing-log-output">
+                                    <!-- Populated via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulation 3: Weather Sounding Telemetry -->
+                    <div class="sim-pane" id="sim-weather">
+                        <div class="pane-header">
+                            <div class="pane-title">
+                                <span class="pulse-dot purple"></span>
+                                <h3>Upper Air Sounding Radiosonde Telemetry</h3>
+                            </div>
+                            <div class="pane-actions">
+                                <button class="btn btn-sm btn-primary" id="launch-sonde-btn">Launch Sonde</button>
+                            </div>
+                        </div>
+                        <div class="pane-body split">
+                            <div class="sounding-graph-container">
+                                <div class="sonde-visual">
+                                    <div class="balloon-container">
+                                        <div class="weather-balloon">
+                                            <i class="fas fa-balloon"></i>
+                                            <svg viewBox="0 0 100 120" width="80" height="96">
+                                                <defs>
+                                                    <radialGradient id="balloonGrad" cx="50%" cy="40%" r="50%">
+                                                        <stop offset="0%" stop-color="#a855f7" />
+                                                        <stop offset="100%" stop-color="#6b21a8" />
+                                                    </radialGradient>
+                                                </defs>
+                                                <!-- Balloon body -->
+                                                <ellipse cx="50" cy="45" rx="35" ry="40" fill="url(#balloonGrad)" />
+                                                <!-- Basket connection -->
+                                                <polygon points="45,85 55,85 50,90" fill="#a855f7" />
+                                                <!-- Lines -->
+                                                <line x1="35" y1="80" x2="48" y2="105" stroke="#ffffff" stroke-dasharray="2" stroke-width="1"/>
+                                                <line x1="65" y1="80" x2="52" y2="105" stroke="#ffffff" stroke-dasharray="2" stroke-width="1"/>
+                                                <!-- Sonde Instrument Box -->
+                                                <rect x="44" y="105" width="12" height="12" fill="#00f0ff" rx="2" />
+                                            </svg>
+                                        </div>
+                                        <div class="altitude-marker font-mono"><span id="sonde-alt">0</span> m</div>
+                                    </div>
+                                    <div class="altitude-line"></div>
+                                </div>
+                            </div>
+                            <div class="telemetry-info">
+                                <div class="telemetry-card">
+                                    <span class="tel-label">Sensor Temperature</span>
+                                    <span class="tel-value" id="sonde-temp">28.4 °C</span>
+                                </div>
+                                <div class="telemetry-card">
+                                    <span class="tel-label">Barometric Pressure</span>
+                                    <span class="tel-value" id="sonde-press">1013.2 hPa</span>
+                                </div>
+                                <div class="telemetry-card">
+                                    <span class="tel-label">Relative Humidity</span>
+                                    <span class="tel-value" id="sonde-hum">68 %</span>
+                                </div>
+                                <div class="telemetry-card">
+                                    <span class="tel-label">Sonde Signal GPS Status</span>
+                                    <span class="tel-value text-purple" id="sonde-gps">LOCK (8 Satellites)</span>
+                                </div>
+                                <div class="progress-bar-container">
+                                    <label>Sonde Battery: 100%</label>
+                                    <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research & Innovation -->
+    <section class="research-section" id="research">
+        <div class="container">
+            <div class="research-grid">
+                <div class="research-image-col scroll-reveal">
+                    <!-- Complex visual card grid -->
+                    <div class="tech-graphic">
+                        <div class="tech-circle outer"></div>
+                        <div class="tech-circle middle"></div>
+                        <div class="tech-circle inner"></div>
+                        <div class="tech-grid-dots"></div>
+                        <div class="floating-tech-card ft-1">
+                            <i class="fas fa-microchip"></i>
+                            <span>Indigenous GNSS</span>
+                        </div>
+                        <div class="floating-tech-card ft-2">
+                            <i class="fas fa-brain"></i>
+                            <span>AI-Enabled GIS</span>
+                        </div>
+                        <div class="floating-tech-card ft-3">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Sensor Fusion</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="research-text-col scroll-reveal">
+                    <span class="section-tag">R&D Roadmap</span>
+                    <h2 class="section-title">Research & Indigenous Innovation</h2>
+                    <div class="section-underline"></div>
+                    <p class="body-text">
+                        Innovation is at the core of everything we do. Terranex continuously invests in engineering research to create next-generation strategic products. We specialize in indigenous development of high-performance GNSS technologies and timing standards, reducing reliance on imported defense architectures.
+                    </p>
+                    <div class="focus-areas-grid">
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-satellite"></i></span>
+                            <h4>Indigenous GNSS Technologies</h4>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-chart-pie"></i></span>
+                            <h4>Advanced Geospatial Analytics</h4>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-map-location-dot"></i></span>
+                            <h4>AI-Enabled Mapping Solutions</h4>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-microchip"></i></span>
+                            <h4>Defense Electronics</h4>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-network-wired"></i></span>
+                            <h4>Sensor Fusion Systems</h4>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-robot"></i></span>
+                            <h4>Autonomous Systems</h4>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-clock"></i></span>
+                            <h4>Precision Timing Technologies</h4>
+                        </div>
+                        <div class="focus-item">
+                            <span class="focus-icon"><i class="fas fa-server"></i></span>
+                            <h4>Critical Infrastructure Monitoring</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries We Serve -->
+    <section class="industries-section" id="industries">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Market Reach</span>
+                <h2 class="section-title">Industries We Serve</h2>
+                <div class="section-underline"></div>
+            </div>
+
+            <div class="industries-grid">
+                <!-- Government -->
+                <div class="industry-card scroll-reveal">
+                    <div class="ind-icon"><i class="fas fa-building-flag"></i></div>
+                    <h3 class="ind-title">Government</h3>
+                    <p class="ind-desc">Land administration, survey departments, smart governance initiatives, and digital transformation programs.</p>
+                </div>
+                <!-- Defense & Aerospace -->
+                <div class="industry-card scroll-reveal">
+                    <div class="ind-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3 class="ind-title">Defense & Aerospace</h3>
+                    <p class="ind-desc">Military organizations, strategic infrastructure, testing laboratories, and aerospace telemetry programs.</p>
+                </div>
+                <!-- Infrastructure -->
+                <div class="industry-card scroll-reveal">
+                    <div class="ind-icon"><i class="fas fa-road-barrier"></i></div>
+                    <h3 class="ind-title">Infrastructure</h3>
+                    <p class="ind-desc">Roads, railways, utility grids, smart cities engineering, and large-scale digital terrain survey development.</p>
+                </div>
+                <!-- Agriculture -->
+                <div class="industry-card scroll-reveal">
+                    <div class="ind-icon"><i class="fas fa-seedling"></i></div>
+                    <h3 class="ind-title">Agriculture</h3>
+                    <p class="ind-desc">Precision farming, automated crop health monitoring, and advanced land survey records administration.</p>
+                </div>
+                <!-- Energy & Utilities -->
+                <div class="industry-card scroll-reveal">
+                    <div class="ind-icon"><i class="fas fa-bolt"></i></div>
+                    <h3 class="ind-title">Energy & Utilities</h3>
+                    <p class="ind-desc">Power generation monitoring, grid synchronization, transmission networks, and oil & gas pipeline tracking.</p>
+                </div>
+                <!-- Research & Education -->
+                <div class="industry-card scroll-reveal">
+                    <div class="ind-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="ind-title">Research & Education</h3>
+                    <p class="ind-desc">Collaborative programs with national universities, scientific institutes, and strategic innovation research hubs.</p>
+                </div>
+            </div>
+
+            <!-- Leadership Callout -->
+            <div class="leadership-callout scroll-reveal">
+                <div class="lc-quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="lc-content">
+                    <h3 class="lc-title" style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-cyan); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Building Technology with Purpose</h3>
+                    <blockquote style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 16px;">
+                        "At Terranex Technologies, we believe technology should solve real-world challenges while creating lasting value for society. Our experienced leadership team brings together decades of industry expertise, technical excellence, and a commitment to innovation.
+                        <br><br>
+                        We are dedicated to delivering solutions that are reliable, scalable, and future-ready while supporting the nation's journey toward technological self-reliance and digital transformation."
+                    </blockquote>
+                    <cite>— Leadership Team, Terranex Technologies</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Get in Touch</span>
+                <h2 class="section-title">Let's Build the Future Together</h2>
+                <div class="section-underline"></div>
+                <p class="section-subtitle">
+                    Whether you require advanced geospatial setups, precision PNT servers, or custom defense engineering, our engineering experts are ready to collaborate.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Info Column -->
+                <div class="contact-info-col scroll-reveal">
+                    <h3>Terranex Technologies Private Limited</h3>
+                    <p class="contact-sub">Headquarters & Technology Division</p>
+                    
+                    <div class="contact-details-list">
+                        <div class="contact-detail-item">
+                            <div class="cd-icon"><i class="fas fa-phone-alt"></i></div>
+                            <div class="cd-text">
+                                <span class="cd-label">Phone Support</span>
+                                <a href="tel:+918270390606" class="cd-value">+91 82703 90606</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="cd-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="cd-text">
+                                <span class="cd-label">General Inquiry</span>
+                                <a href="mailto:info@terranextechnologies.com" class="cd-value">info@terranextechnologies.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="cd-icon"><i class="fas fa-circle-question"></i></div>
+                            <div class="cd-text">
+                                <span class="cd-label">Support Email</span>
+                                <a href="mailto:support@terranextechnologies.com" class="cd-value">support@terranextechnologies.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modern Interactive Map Placeholder -->
+                    <div class="map-placeholder">
+                        <div class="map-grid"></div>
+                        <div class="map-marker-pulse"></div>
+                        <div class="map-label">
+                            <i class="fas fa-location-dot"></i>
+                            <span>Operational Hub (Chennai, India)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="contact-form-col scroll-reveal">
+                    <form id="contact-form" class="modern-form" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-name">Full Name *</label>
+                                <input type="text" id="form-name" required placeholder="John Doe">
+                                <span class="form-error-msg">Please enter your name.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email">Business Email *</label>
+                                <input type="email" id="form-email" required placeholder="john@company.com">
+                                <span class="form-error-msg">Please enter a valid email address.</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="form-subject">Subject</label>
+                            <select id="form-subject" class="form-select">
+                                <option value="geospatial">Geospatial Solutions & RTK Systems</option>
+                                <option value="defense">Defense & Aerospace Technologies</option>
+                                <option value="pnt">Precision Timing & PNT Synchronization</option>
+                                <option value="testing">Testing, Sounding & Monitoring Systems</option>
+                                <option value="general" selected>General Business Partnership</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="form-message">Your Message *</label>
+                            <textarea id="form-message" rows="5" required placeholder="Describe your technical requirements..."></textarea>
+                            <span class="form-error-msg">Please write a message.</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span>Send Secure Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                        
+                        <div class="form-success-box" id="form-success">
+                            <i class="fas fa-circle-check"></i>
+                            <div>
+                                <h4>Message Sent Successfully</h4>
+                                <p>Thank you for contacting Terranex. Our technical team will get back to you within 24 hours.</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Verticals Detail (Bento expansion fallback) -->
+    <div class="modal-overlay" id="vertical-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
+            <div class="modal-body" id="modal-body-content">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="footer-logo-svg">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                    <span>TERRANEX</span>
+                </a>
+                <p class="footer-slogan">Engineering Precision. Enabling Decisions. Securing the Future.</p>
+            </div>
+            <div class="footer-links-group">
+                <h4>Solutions</h4>
+                <a href="#verticals">Geospatial Solutions</a>
+                <a href="#verticals">Defense Electronics</a>
+                <a href="#verticals">PNT Synchronization</a>
+                <a href="#verticals">Testing & Sounding</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Company</h4>
+                <a href="#about">Who We Are</a>
+                <a href="#about">Vision & Mission</a>
+                <a href="#industries">Industries Served</a>
+                <a href="#research">R&D Roadmap</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Legal & Info</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#contact">Support Desk</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>&copy; 2026 Terranex Technologies Private Limited. All Rights Reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button for Persistent CTA -->
+    <a href="#contact" class="floating-cta" aria-label="Book Demo / Contact Us">
+        <i class="fas fa-comments"></i>
+        <span>Book Demo</span>
+    </a>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>
