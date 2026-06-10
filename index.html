@@ -188,25 +188,51 @@
             <!-- Bento Grid Layout -->
             <div class="bento-grid">
                 <!-- Vertical 1: Geospatial Solutions (Big Card) -->
-                <div class="bento-card card-large scroll-reveal">
-                    <div class="card-bg-glow color-cyan"></div>
+                <div class="bento-card card-large color-cyan scroll-reveal">
+                    <div class="card-bg-glow"></div>
+                    <div class="card-bg-graphic">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                            <circle cx="50" cy="50" r="40" stroke-dasharray="1 5" />
+                            <circle cx="50" cy="50" r="25" />
+                            <path d="M50 0 v100 M0 50 h100" />
+                            <path d="M15 15 l70 70 M15 85 l70 -70" stroke-dasharray="2 2" />
+                        </svg>
+                    </div>
                     <div class="card-content">
-                        <div class="card-header-icon">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
-                        <div class="card-info">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-map-marked-alt"></i></div>
                             <h3 class="card-title">Geospatial Solutions</h3>
-                            <p class="card-description">
-                                Delivering advanced geospatial technologies that enable precise positioning, mapping, surveying, and location intelligence for government, infrastructure, agriculture, mining, and utility sectors.
-                            </p>
-                            <div class="tag-container">
-                                <span class="tag">GNSS Receivers</span>
-                                <span class="tag">RTK Systems</span>
-                                <span class="tag">DGPS Solutions</span>
-                                <span class="tag">Drone Survey</span>
-                                <span class="tag">CORS Infrastructure</span>
-                                <span class="tag">Utility Mapping</span>
+                        </div>
+                        <p class="card-description">
+                            Delivering advanced geospatial technologies that enable precise positioning, mapping, surveying, and location intelligence for government, infrastructure, agriculture, mining, and utility sectors.
+                        </p>
+                        <div class="solution-grid">
+                            <div class="solution-box">
+                                <div class="sol-icon"><i class="fas fa-satellite-dish"></i></div>
+                                <span class="sol-label">GNSS Receivers</span>
                             </div>
+                            <div class="solution-box">
+                                <div class="sol-icon"><i class="fas fa-location-crosshairs"></i></div>
+                                <span class="sol-label">RTK Systems</span>
+                            </div>
+                            <div class="solution-box">
+                                <div class="sol-icon"><i class="fas fa-signal"></i></div>
+                                <span class="sol-label">DGPS Solutions</span>
+                            </div>
+                            <div class="solution-box">
+                                <div class="sol-icon"><i class="fas fa-helicopter"></i></div>
+                                <span class="sol-label">Drone Survey</span>
+                            </div>
+                            <div class="solution-box">
+                                <div class="sol-icon"><i class="fas fa-tower-broadcast"></i></div>
+                                <span class="sol-label">CORS Infrastructure</span>
+                            </div>
+                            <div class="solution-box">
+                                <div class="sol-icon"><i class="fas fa-map-location-dot"></i></div>
+                                <span class="sol-label">Utility Mapping</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
                             <button class="btn btn-link vertical-explore-btn" data-vertical="geospatial">
                                 <span>View Full Capabilities</span>
                                 <i class="fas fa-arrow-right"></i>
@@ -215,23 +241,26 @@
                     </div>
                 </div>
 
-                <!-- Vertical 2: Defense & Aerospace Technologies -->
-                <div class="bento-card card-medium scroll-reveal">
-                    <div class="card-bg-glow color-blue"></div>
+                <!-- Vertical 2: Defense & Aerospace Technologies (Small Card) -->
+                <div class="bento-card card-small color-blue scroll-reveal">
+                    <div class="card-bg-glow"></div>
+                    <div class="card-bg-graphic">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                            <circle cx="50" cy="50" r="35" />
+                            <circle cx="50" cy="50" r="10" />
+                            <path d="M50 5 v20 M50 75 v20 M5 50 h20 M75 50 h20" stroke-width="1.5" />
+                            <path d="M30 30 l40 40" stroke-width="0.5" />
+                        </svg>
+                    </div>
                     <div class="card-content">
-                        <div class="card-header-icon">
-                            <i class="fas fa-fighter-jet"></i>
-                        </div>
-                        <div class="card-info">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-fighter-jet"></i></div>
                             <h3 class="card-title">Defense & Aerospace</h3>
-                            <p class="card-description">
-                                Mission-critical technologies and specialized engineering solutions supporting aerospace and strategic defense applications.
-                            </p>
-                            <div class="tag-container">
-                                <span class="tag">Defense Electronics</span>
-                                <span class="tag">Tactical Comms</span>
-                                <span class="tag">Sensor Fusion</span>
-                            </div>
+                        </div>
+                        <p class="card-description">
+                            Mission-critical technologies and specialized engineering solutions supporting aerospace and strategic defense applications.
+                        </p>
+                        <div class="card-footer">
                             <button class="btn btn-link vertical-explore-btn" data-vertical="defense">
                                 <span>Explore Capabilities</span>
                                 <i class="fas fa-arrow-right"></i>
@@ -240,23 +269,26 @@
                     </div>
                 </div>
 
-                <!-- Vertical 3: Positioning, Navigation & Timing (PNT) -->
-                <div class="bento-card card-medium scroll-reveal">
-                    <div class="card-bg-glow color-emerald"></div>
+                <!-- Vertical 3: Positioning, Navigation & Timing (Small Card) -->
+                <div class="bento-card card-small color-emerald scroll-reveal">
+                    <div class="card-bg-glow"></div>
+                    <div class="card-bg-graphic">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                            <circle cx="50" cy="50" r="45" stroke-dasharray="3 3" />
+                            <circle cx="50" cy="50" r="30" />
+                            <circle cx="50" cy="50" r="15" />
+                            <circle cx="50" cy="50" r="5" fill="currentColor" />
+                        </svg>
+                    </div>
                     <div class="card-content">
-                        <div class="card-header-icon">
-                            <i class="fas fa-satellite"></i>
-                        </div>
-                        <div class="card-info">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-satellite"></i></div>
                             <h3 class="card-title">Positioning, Navigation & Timing</h3>
-                            <p class="card-description">
-                                Multi-constellation GNSS receiver setups and microsecond-accurate time servers forming the backbone of infrastructure.
-                            </p>
-                            <div class="tag-container">
-                                <span class="tag">NTP/PTP Timing</span>
-                                <span class="tag">Frequency Servers</span>
-                                <span class="tag">GNSS Systems</span>
-                            </div>
+                        </div>
+                        <p class="card-description">
+                            Multi-constellation GNSS receiver setups and microsecond-accurate time servers forming the backbone of infrastructure.
+                        </p>
+                        <div class="card-footer">
                             <button class="btn btn-link vertical-explore-btn" data-vertical="pnt">
                                 <span>Explore Systems</span>
                                 <i class="fas fa-arrow-right"></i>
@@ -266,20 +298,27 @@
                 </div>
 
                 <!-- Vertical 4: Defense Testing & Monitoring Products (Wide Card) -->
-                <div class="bento-card card-wide scroll-reveal">
-                    <div class="card-bg-glow color-purple"></div>
+                <div class="bento-card card-wide color-purple scroll-reveal">
+                    <div class="card-bg-glow"></div>
+                    <div class="card-bg-graphic">
+                        <svg viewBox="0 0 200 60" fill="none" stroke="currentColor" preserveAspectRatio="none">
+                            <path d="M0 30 Q 20 10, 40 30 T 80 30 T 120 30 T 160 30 T 200 30" stroke-dasharray="2 2" />
+                            <path d="M0 30 Q 15 5, 30 30 T 60 30 T 90 30 T 120 30 T 150 30 T 180 30 T 200 30" stroke-width="1.5" stroke-dasharray="1 3" />
+                            <line x1="0" y1="30" x2="200" y2="30" stroke-width="0.5" />
+                        </svg>
+                    </div>
                     <div class="card-content">
-                        <div class="card-header-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="card-info-row">
-                            <div class="info-main">
-                                <h3 class="card-title">Defense Testing & Monitoring</h3>
+                        <div class="wide-card-layout">
+                            <div class="wide-main">
+                                <div class="card-header">
+                                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                                    <h3 class="card-title">Defense Testing & Monitoring</h3>
+                                </div>
                                 <p class="card-description">
                                     Sophisticated testing instrumentation, industrial display architectures, process safety equipment, and furnace thermal monitoring solutions engineered for high-stress defense environments.
                                 </p>
                             </div>
-                            <div class="info-side">
+                            <div class="wide-side">
                                 <div class="tag-container">
                                     <span class="tag">Upper Air Sounding</span>
                                     <span class="tag">Weather Stations</span>
