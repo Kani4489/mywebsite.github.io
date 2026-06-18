@@ -34,6 +34,7 @@
                 <a href="#home" class="nav-link active">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#verticals" class="nav-link">Verticals</a>
+                <a href="#products" class="nav-link">Products</a>
                 <a href="#command-center" class="nav-link">PNT Hub</a>
                 <a href="#industries" class="nav-link">Industries</a>
                 <a href="#contact" class="nav-link nav-btn-mobile">Contact Us</a>
@@ -232,12 +233,6 @@
                                 <span class="sol-label">Utility Mapping</span>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button class="btn btn-link vertical-explore-btn" data-vertical="geospatial">
-                                <span>View Full Capabilities</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -260,12 +255,6 @@
                         <p class="card-description">
                             Mission-critical technologies and specialized engineering solutions supporting aerospace and strategic defense applications.
                         </p>
-                        <div class="card-footer">
-                            <button class="btn btn-link vertical-explore-btn" data-vertical="defense">
-                                <span>Explore Capabilities</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -288,17 +277,11 @@
                         <p class="card-description">
                             Multi-constellation GNSS receiver setups and microsecond-accurate time servers forming the backbone of infrastructure.
                         </p>
-                        <div class="card-footer">
-                            <button class="btn btn-link vertical-explore-btn" data-vertical="pnt">
-                                <span>Explore Systems</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Vertical 4: Defense Testing & Monitoring Products (Wide Card) -->
-                <div class="bento-card card-wide color-purple scroll-reveal">
+                <!-- Vertical 4: Defense Testing & Monitoring Products (2/3 Width Card) -->
+                <div class="bento-card card-double color-purple scroll-reveal">
                     <div class="card-bg-glow"></div>
                     <div class="card-bg-graphic">
                         <svg viewBox="0 0 200 60" fill="none" stroke="currentColor" preserveAspectRatio="none">
@@ -308,8 +291,8 @@
                         </svg>
                     </div>
                     <div class="card-content">
-                        <div class="wide-card-layout">
-                            <div class="wide-main">
+                        <div class="double-card-layout">
+                            <div class="double-main">
                                 <div class="card-header">
                                     <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                                     <h3 class="card-title">Defense Testing & Monitoring</h3>
@@ -318,7 +301,7 @@
                                     Sophisticated testing instrumentation, industrial display architectures, process safety equipment, and furnace thermal monitoring solutions engineered for high-stress defense environments.
                                 </p>
                             </div>
-                            <div class="wide-side">
+                            <div class="double-side">
                                 <div class="tag-container">
                                     <span class="tag">Upper Air Sounding</span>
                                     <span class="tag">Weather Stations</span>
@@ -333,6 +316,59 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Vertical 5: Precision Agriculture (Small Card) -->
+                <div class="bento-card card-small color-green scroll-reveal">
+                    <div class="card-bg-glow"></div>
+                    <div class="card-bg-graphic">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                            <path d="M 0 100 Q 50 20 100 100" stroke-width="1" />
+                            <path d="M 0 100 Q 50 40 100 100" stroke-width="1" stroke-dasharray="2 2" />
+                            <path d="M 0 100 Q 50 60 100 100" stroke-width="1" />
+                            <line x1="50" y1="20" x2="50" y2="100" stroke-width="0.5" />
+                            <line x1="20" y1="64" x2="50" y2="100" stroke-width="0.5" />
+                            <line x1="80" y1="64" x2="50" y2="100" stroke-width="0.5" />
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="card-icon"><i class="fas fa-tractor"></i></div>
+                            <h3 class="card-title">Precision Agriculture</h3>
+                        </div>
+                        <p class="card-description">
+                            Smart farming technologies, automated tractor autosteer kits, and crop monitoring telemetry systems.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inline Product Showcase Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Product Catalog</span>
+                <h2 class="section-title">Our Product Portfolio</h2>
+                <div class="section-underline"></div>
+                <p class="section-subtitle">
+                    Explore our complete range of precision instruments, survey equipment, defense systems, and smart agriculture solutions.
+                </p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="product-filter-tabs" id="product-filter-tabs">
+                <button class="product-filter-btn active" data-filter="all"><span>All Products</span></button>
+                <button class="product-filter-btn" data-filter="automatic-levels"><span>Automatic Levels</span></button>
+                <button class="product-filter-btn" data-filter="robotic-total-stations"><span>Robotic Total Stations</span></button>
+                <button class="product-filter-btn" data-filter="manual-total-stations"><span>Manual Total Stations</span></button>
+                <button class="product-filter-btn" data-filter="defense-components"><span>Defense Components</span></button>
+                <button class="product-filter-btn" data-filter="auto-steer-systems"><span>Auto-Steer Systems</span></button>
+            </div>
+
+            <!-- Products Grid (populated via JS) -->
+            <div class="products-showcase-grid" id="products-showcase-grid">
+                <!-- Product cards rendered dynamically -->
             </div>
         </div>
     </section>
