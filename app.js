@@ -243,345 +243,549 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================================
-    // 5. Bento Card Details Modal Expansion
+    // 5. White Background Removal (Canvas Processing)
+    // ==========================================
+    function removeWhiteBackground(imgElement) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i];
+                    const g = data[i + 1];
+                    const b = data[i + 2];
+
+                    // Detect white and near-white pixels
+                    if (r > 215 && g > 215 && b > 215) {
+                        // Smooth alpha transition for edge anti-aliasing
+                        const brightness = (r + g + b) / 3;
+                        if (brightness > 245) {
+                            data[i + 3] = 0; // Fully transparent
+                        } else {
+                            // Gradual fade for mid-range whites (edge pixels)
+                            const alpha = Math.max(0, ((245 - brightness) / 30) * 255);
+                            data[i + 3] = Math.min(data[i + 3], Math.round(alpha));
+                        }
+                    }
+                }
+
+                ctx.putImageData(imageData, 0, 0);
+
+                try {
+                    imgElement.src = canvas.toDataURL('image/png');
+                } catch (e) {
+                    // CORS issue fallback - keep original
+                }
+                resolve();
+            };
+            img.onerror = () => resolve();
+            img.src = imgElement.src;
+        });
+    }
+
+    // Process all product images after page loads
+    function processProductImages() {
+        const productImages = document.querySelectorAll('.showcase-product-img, .product-img');
+        productImages.forEach(img => {
+            if (img.complete && img.naturalWidth > 0) {
+                removeWhiteBackground(img);
+            } else {
+                img.addEventListener('load', () => removeWhiteBackground(img), { once: true });
+            }
+        });
+    }
+
+
+    // ==========================================
+    // 5b. Inline Product Showcase Rendering
+    // ==========================================
+    const allProducts = [
+        // === Automatic Levels ===
+        {
+            name: 'Sokkia B Series Automatic Level (B20/B30/B40)',
+            image: 'images/image1.png',
+            desc: 'Field-proven precision automatic level featuring a highly reliable compensator and superior telescope focus.',
+            category: 'automatic-levels',
+            categoryLabel: 'Automatic Level',
+            specs: [
+                'Three magnification models: B20 (32x), B30 (28x), B40 (24x)',
+                'Precise, field-proven compensator for accurate leveling',
+                'Horizontal angle measurement with standard graduation',
+                'Superior telescope with two-speed focus knob',
+                'Quick collimation with two horizontal motion knobs'
+            ],
+            brochure: 'https://www.sokkia.com/sites/default/files/product/downloads/b20-b30-b40_brochure_sok-1025_reva_team_en_us_lores.pdf'
+        },
+        // === Robotic Total Stations ===
+        {
+            name: 'Sokkia iX-1500 / iX-700 Robotic Total Station',
+            image: 'images/image2.png',
+            desc: 'High-performance robotic total station featuring ultra-fast tracking technology for high precision layout.',
+            category: 'robotic-total-stations',
+            categoryLabel: 'Robotic Total Station',
+            specs: [
+                'UltraSonic motor drive with 180°/sec rotation speed',
+                'UltraSlim body design with large color touch-screen display',
+                'Integrated RC-5 remote control receiver unit',
+                'Sokkia TSshield security and tracking cloud system',
+                'Built-in Bluetooth and wireless communications interface'
+            ],
+            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/sokkia_ix-1500_700_sok-1055_engl25data_revc.pdf'
+        },
+        {
+            name: 'Sokkia iX-1200 / iX-600 Robotic Total Station',
+            image: 'images/image3.png',
+            desc: 'Precision surveying motor total station offering advanced auto-tracking and layout capability.',
+            category: 'robotic-total-stations',
+            categoryLabel: 'Robotic Total Station',
+            specs: [
+                'High-reliability UltraSonic motors with direct drive system',
+                'Dual-axis liquid tilt compensator mechanism',
+                'Integrated reflectorless EDM measuring up to 800m',
+                'Sokkia MAGNET Field on-board controller software',
+                'Robust design with IP65 dust and water protection rating'
+            ],
+            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/sokkia_ix-series_sok-1056_engl25broc_reva.pdf'
+        },
+        {
+            name: 'Leica FlexLine TS16 Robotic Total Station',
+            image: 'images/image4.png',
+            desc: 'Self-learning robotic total station that adapts dynamically to any environmental condition.',
+            category: 'robotic-total-stations',
+            categoryLabel: 'Robotic Total Station',
+            specs: [
+                'ARTrending intelligent target search and lock capability',
+                'Dynamic Lock technology locks onto moving prisms automatically',
+                'Integrated Leica Captivate field software with 3D views',
+                'Laser guide pointer for rapid target coordinate alignment',
+                'PinPoint EDM reflectorless range up to 1,000 meters'
+            ],
+            brochure: 'https://leica-geosystems.com/-/media/files/leicageosystems/products/datasheets/leica-ts16/leica%20ts16%20ds%20929657%201120%20en%20lr.pdf?sc_lang=en-in&hash=A006187B045D3BA8532EC8EC5706711E'
+        },
+        {
+            name: 'Leica Nova TS60 MultiStation',
+            image: 'images/image5.png',
+            desc: "The world's most accurate total station, designed for the most demanding engineering projects.",
+            category: 'robotic-total-stations',
+            categoryLabel: 'Robotic Total Station',
+            specs: [
+                'Sub-millimeter angular accuracy (0.5" angular resolution)',
+                'Dynamic Lock target tracking and ATRplus lock stability',
+                'Integrated high-resolution telescope and wide-angle cameras',
+                'Complete integration with Leica Captivate on-board software',
+                'Engineered for highly precise structural monitoring tasks'
+            ],
+            brochure: 'https://leica-geosystems.com/-/media/files/leicageosystems/products/datasheets/leica_nova_ts60_ds.pdf?sc_lang=en-in&hash=662A41553D2B03258825CD33F09E0BB8'
+        },
+        {
+            name: 'Leica Nova TM50 Monitoring Total Station',
+            image: 'images/image6.png',
+            desc: 'Automated structural monitoring sensor built for 24/7 continuous operation in harsh environments.',
+            category: 'robotic-total-stations',
+            categoryLabel: 'Robotic Total Station',
+            specs: [
+                'High-reliability direct piezo motor drives for silent rotation',
+                'Dual-camera system featuring overview and telescope imaging',
+                'Long-range EDM measuring up to 3,000m to standard prisms',
+                'Robust design with full IP65 ingress protection rating',
+                'Seamlessly integrated with Leica GeoMoS automated software'
+            ],
+            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/robotic-total-stations/leica-nova-tm50'
+        },
+        // === Manual Total Stations ===
+        {
+            name: 'Sokkia iM-50 Series Manual Total Station',
+            image: 'images/image7.png',
+            desc: 'Compact and lightweight layout tool offering high quality surveying at an entry-level price.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Manual Total Station',
+            specs: [
+                'Fast and accurate reflectorless EDM measuring up to 500m',
+                'Dual-axis tilt compensation for precise leveling control',
+                'High-capacity internal memory storing up to 50,000 points',
+                'Up to 15 hours battery life for continuous field operation',
+                'Waterproof design with IP66 rugged environmental rating'
+            ],
+            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/sokkia_im-50_brochure_sok_1046_reva_sm.pdf'
+        },
+        {
+            name: 'Sokkia iM-100 Series Manual Total Station',
+            image: 'images/image8.png',
+            desc: 'Mid-range manual total station designed for high accuracy surveying and layout tasks.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Manual Total Station',
+            specs: [
+                'Powerful EDM measuring up to 800m in reflectorless mode',
+                'Integrated Bluetooth communications for data collector link',
+                'Dual display panels with alphanumeric keyboard inputs',
+                'Bi-directional dual-axis tilt compensator sensor',
+                'MAGNET Field on-board software option for smart workflows'
+            ],
+            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/im-100series_broch_sok-1042_revb_team_en_us_lores.pdf'
+        },
+        {
+            name: 'Sokkia FX Advanced Manual Total Station',
+            image: 'images/image9.png',
+            desc: 'Advanced manual total station featuring color touch screen and on-board software integration.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Manual Total Station',
+            specs: [
+                'Windows CE operating system on-board console controller',
+                'MAGNET Field data collection software pre-installed',
+                'Long-range reflectorless EDM measuring up to 500m',
+                'TSshield telemetry cloud support security system',
+                'Built-in Bluetooth and flash storage card interfaces'
+            ],
+            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/fx-200_manualtotalstation_broch_sok-1052_reva_team_en_us_lores_2.pdf'
+        },
+        {
+            name: 'Leica FlexLine TS10 Manual Total Station',
+            image: 'images/image10.png',
+            desc: 'High-end manual total station with a large color display and Leica Captivate field software.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Manual Total Station',
+            specs: [
+                'Integrated Leica Captivate software with 3D viewer',
+                'AutoHeight auto-sensor measures instrument height instantly',
+                'Reflectorless range up to 1,000m with PinPoint EDM',
+                'Large high-resolution color touchscreen interface panel',
+                'Mobile data network module option for office synchronization'
+            ],
+            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/manual-total-stations/leica-flexline-ts10'
+        },
+        {
+            name: 'Leica FlexLine TS03 Manual Total Station',
+            image: 'images/image11.png',
+            desc: 'Classic manual total station designed for standard, high-reliability daily surveying tasks.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Manual Total Station',
+            specs: [
+                'User-friendly Leica FlexField on-board workflow software',
+                'Highly precise angular and distance measurements accuracy',
+                'Reflectorless measurement range up to 500m with EDM',
+                'Robust design with high resistance to water and dust',
+                'Large internal memory storage for survey data points'
+            ],
+            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/manual-total-stations/leica-flexline-ts03'
+        },
+        {
+            name: 'Leica FlexLine TS07 Manual Total Station',
+            image: 'images/image12.png',
+            desc: 'Professional manual total station featuring AutoHeight and color touch screen capabilities.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Manual Total Station',
+            specs: [
+                'AutoHeight auto-laser measurement of instrument height',
+                'Leica FlexField software with intuitive menu layouts',
+                'Full color touchscreen display console with keyboard',
+                'PinPoint EDM reflectorless measuring range up to 1,000m',
+                'Wireless connectivity option with built-in Bluetooth'
+            ],
+            brochure: 'https://leica-geosystems.com/-/media/files/leicageosystems/products/datasheets/leica%20flexline%20ts07%200221%20en-in%20lr.pdf?sc_lang=en-in&hash=1B27FF238DB1E23ACB2FB16E13246299'
+        },
+        {
+            name: 'Leica TS01 Manual Total Station',
+            image: 'images/image13.png',
+            desc: 'Entry-level manual total station designed for construction layout and basic surveying.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Manual Total Station',
+            specs: [
+                'Simple and intuitive keyboard interface design layout',
+                'Fast and accurate distance measurements with EDM tracker',
+                'Reflectorless measurement capability up to 500m',
+                'Long operational battery life for full day assignments',
+                'Rugged build quality certified for active worksites'
+            ],
+            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/manual-total-stations/leica-ts01'
+        },
+        {
+            name: 'Sokkia NET AXII 3D Monitoring Station',
+            image: 'images/image14.jpeg',
+            desc: 'Ultra-precise 3D monitoring station designed for structural and engineering deformations monitoring.',
+            category: 'manual-total-stations',
+            categoryLabel: 'Monitoring Station',
+            specs: [
+                'Ultra-precise angular measurement (0.5" or 1" models)',
+                'Auto-collimation tracking with intelligent target search',
+                'Highly precise distance accuracy (0.5mm + 1ppm to prism)',
+                'Reflectorless EDM optimized for structural scanning tasks',
+                'IP65 dust and water ingress protection rating standard'
+            ],
+            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/net-axiiseries_3dmonitoringstations_broch_sok-1002_reve_team_en_us_lores.pdf'
+        },
+        {
+            name: 'Leica Nova MS60 MultiStation',
+            image: 'images/image15.png',
+            desc: 'All-in-one scanning total station integrating 3D laser scanning, imaging, and GNSS.',
+            category: 'manual-total-stations',
+            categoryLabel: 'MultiStation',
+            specs: [
+                '3D laser scanning speeds up to 30,000 Hz frequencies',
+                'Highly precise ATRplus automatic prism tracking system',
+                'Integrated overview and telescope digital camera system',
+                'Full integration with Leica Captivate 3D field apps',
+                'Designed for rapid scanning, layout, and structural checks'
+            ],
+            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/multistations/leica-nova-ms60'
+        },
+        // === Defense Components ===
+        {
+            name: 'Tactical GNSS & Inertial Navigation Module',
+            image: 'images/image16.jpeg',
+            desc: 'Rugged military-grade positioning module combining high-sensitivity multi-constellation GNSS with inertial sensors.',
+            category: 'defense-components',
+            categoryLabel: 'Defense System',
+            specs: [
+                'Tactical-grade MEMS IMU sensor integration',
+                'Jamming and spoofing mitigation algorithms',
+                'Dual-frequency L1/L2 multi-constellation support',
+                'Ruggedized enclosure meeting MIL-STD-810H standards',
+                'High-speed serial and Ethernet interface connections'
+            ],
+            brochure: '#contact'
+        },
+        {
+            name: 'High-Reliability Defense Telemetry Unit',
+            image: 'images/image17.jpeg',
+            desc: 'Mission-critical data telemetry processor engineered for real-time sensor processing and strategic communications.',
+            category: 'defense-components',
+            categoryLabel: 'Defense System',
+            specs: [
+                'High-speed DSP processor core architecture',
+                'Multiple analog and digital signal input channels',
+                'Low latency data encoding and transmission protocols',
+                'Operational temperature range of -40°C to +85°C',
+                'EMI/EMC shielded enclosure for strategic systems'
+            ],
+            brochure: '#contact'
+        },
+        {
+            name: 'Military Timing & Frequency Distribution Server',
+            image: 'images/image18.jpeg',
+            desc: 'Ultra-precise synchronization server distributing microsecond-accurate timing across defense networks.',
+            category: 'defense-components',
+            categoryLabel: 'Defense System',
+            specs: [
+                'Rubidium atomic frequency standard core reference',
+                'NTP, PTP, IRIG-B, and PPS output synchronization interfaces',
+                'High-stability holdover performance during GPS signal loss',
+                'Dual-redundant power supply inputs configuration',
+                'Designed for military communications and radar command grids'
+            ],
+            brochure: '#contact'
+        },
+        // === Auto-Steer Systems ===
+        {
+            name: 'FJD AT2 Auto-Steer System',
+            image: 'images/image19.png',
+            desc: 'Automated steering solution combining GNSS navigation with electric steering wheel control for tractors.',
+            category: 'auto-steer-systems',
+            categoryLabel: 'Auto-Steer',
+            specs: [
+                'High precision steering accuracy within +/- 2.5cm',
+                'Easy installation on a wide range of tractor models',
+                'Full steering automation reduces operator fatigue',
+                'Touch screen display console showing live operations map',
+                'Built-in terrain compensation sensor algorithms'
+            ],
+            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-auto-steer-system'
+        },
+        {
+            name: 'FJD AT2 Ultra Auto-Steer System',
+            image: 'images/image20.png',
+            desc: 'Ultra-precision agricultural guidance solution featuring RTK positioning and advanced path planning.',
+            category: 'auto-steer-systems',
+            categoryLabel: 'Auto-Steer',
+            specs: [
+                'Premium RTK positioning system accuracy',
+                'Support for complex curved and spiral field paths',
+                'Automatic headland turns capability automation',
+                'Integrates with smart implements via ISOBUS interface',
+                'Cloud platform link for digital farm job records'
+            ],
+            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-auto-steer-system'
+        },
+        {
+            name: 'FJD AT2 Max Auto-Steer System',
+            image: 'images/image21.png',
+            desc: 'Top-tier autosteer navigation kit designed for large-scale operations requiring maximum uptime.',
+            category: 'auto-steer-systems',
+            categoryLabel: 'Auto-Steer',
+            specs: [
+                'Dual-antenna RTK receiver setup for heading stability',
+                'High-torque electric steering wheel motor',
+                'Real-time visual monitoring via crop guidance camera',
+                'Rugged hardware constructed for tough field environments',
+                'Lifetime support for software updates and map tools'
+            ],
+            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-max-auto-steer-system'
+        },
+        {
+            name: 'FJD AT2 Lite Auto-Steer System',
+            image: 'images/image22.png',
+            desc: 'Entry-level guidance autosteer system for small farms looking to introduce smart farming.',
+            category: 'auto-steer-systems',
+            categoryLabel: 'Auto-Steer',
+            specs: [
+                'Sub-meter coordinate positioning accuracy guidance',
+                'Simplified setup console wizard for fast deployment',
+                'Manual driving assist modes with guidance lines',
+                'Cost-effective system that saves seed, fuel, and time',
+                'Option to upgrade easily to RTK accuracy later'
+            ],
+            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-lite-auto-steer-system'
+        },
+        {
+            name: 'FJD AT1 Autosteering Kit',
+            image: 'images/image23.png',
+            desc: 'Field-proven robust steering kit providing high reliability and coordinate lock on the path.',
+            category: 'auto-steer-systems',
+            categoryLabel: 'Auto-Steer',
+            specs: [
+                'High reliability hydraulic or electric steering options',
+                'Maintains precise path accuracy even in dust and fog',
+                'Intuitive control application interface layout',
+                'Durable sensors designed for heavy duty machines',
+                'Multi-language terminal guidance support options'
+            ],
+            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at1-autosteering-kit'
+        }
+    ];
+
+    // Render product cards into the showcase grid
+    const showcaseGrid = document.getElementById('products-showcase-grid');
+
+    function renderProductCard(product, index) {
+        return `
+            <div class="showcase-product-card scroll-reveal" data-category="${product.category}" style="animation-delay: ${index * 0.06}s">
+                <div class="showcase-img-container">
+                    <span class="showcase-category-badge">${product.categoryLabel}</span>
+                    <img src="${product.image}" alt="${product.name}" class="showcase-product-img" loading="lazy" onerror="this.src='images/image1.png'">
+                </div>
+                <div class="showcase-product-info">
+                    <h4 class="showcase-product-name">${product.name}</h4>
+                    <p class="showcase-product-desc">${product.desc}</p>
+                    <button class="specs-toggle-btn" aria-expanded="false">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>View Specifications</span>
+                    </button>
+                    <div class="specs-collapsible">
+                        <ul class="showcase-specs-list">
+                            ${product.specs.map(spec => `
+                                <li><i class="fas fa-circle-check"></i> <span>${spec}</span></li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+                <div class="showcase-product-actions">
+                    <a href="${product.brochure}" target="_blank" class="showcase-brochure-btn">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>${product.brochure === '#contact' ? 'Request Datasheet' : 'Download Brochure'}</span>
+                    </a>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderAllProducts(filter = 'all') {
+        const filtered = filter === 'all'
+            ? allProducts
+            : allProducts.filter(p => p.category === filter);
+
+        showcaseGrid.innerHTML = filtered.map((p, i) => renderProductCard(p, i)).join('');
+
+        // Re-observe scroll-reveal on new elements
+        const newCards = showcaseGrid.querySelectorAll('.scroll-reveal');
+        newCards.forEach(el => observer.observe(el));
+
+        // Process images for background removal
+        setTimeout(processProductImages, 100);
+
+        // Re-bind specs toggles
+        bindSpecsToggles();
+    }
+
+    // Initial render
+    renderAllProducts();
+
+
+    // ==========================================
+    // 5c. Product Filter Tabs
+    // ==========================================
+    const filterTabs = document.querySelectorAll('.product-filter-btn');
+
+    filterTabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
+
+            // Update active tab
+            filterTabs.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Fade out existing cards
+            const existingCards = showcaseGrid.querySelectorAll('.showcase-product-card');
+            existingCards.forEach(card => card.classList.add('fade-out'));
+
+            // After fade-out, re-render with new filter
+            setTimeout(() => {
+                renderAllProducts(filter);
+
+                // Apply fade-in animation to new cards
+                const newCards = showcaseGrid.querySelectorAll('.showcase-product-card');
+                newCards.forEach((card, i) => {
+                    card.style.animationDelay = `${i * 0.05}s`;
+                    card.classList.add('fade-in');
+                });
+            }, 250);
+        });
+    });
+
+
+    // ==========================================
+    // 5d. Specs Toggle (Expand/Collapse)
+    // ==========================================
+    function bindSpecsToggles() {
+        const toggleBtns = document.querySelectorAll('.specs-toggle-btn');
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const collapsible = btn.nextElementSibling;
+                const isExpanded = btn.classList.contains('expanded');
+
+                if (isExpanded) {
+                    btn.classList.remove('expanded');
+                    collapsible.classList.remove('expanded');
+                    btn.querySelector('span').textContent = 'View Specifications';
+                    btn.setAttribute('aria-expanded', 'false');
+                } else {
+                    btn.classList.add('expanded');
+                    collapsible.classList.add('expanded');
+                    btn.querySelector('span').textContent = 'Hide Specifications';
+                    btn.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    }
+
+
+    // ==========================================
+    // 5e. Modal (kept for Testing vertical only)
     // ==========================================
     const modal = document.getElementById('vertical-modal');
     const modalClose = document.getElementById('modal-close');
     const modalContent = document.getElementById('modal-body-content');
     const verticalBtns = document.querySelectorAll('.vertical-explore-btn');
 
-    // Capabilities content registry matching Websitecontent.txt
-    const capabilitiesData = {
-        geospatial: {
-            title: 'Geospatial Solutions',
-            desc: 'Terranex delivers advanced geospatial technologies that enable precise positioning, mapping, surveying, and location intelligence for government, infrastructure, agriculture, mining, and utility sectors.',
-            itemsTitle: 'Solutions Include:',
-            hasProducts: true,
-            tabs: [
-                {
-                    title: 'Overview',
-                    type: 'overview'
-                },
-                {
-                    title: 'Automatic Levels',
-                    type: 'products',
-                    products: [
-                        {
-                            name: 'Sokkia B Series Automatic Level (B20/B30/B40)',
-                            image: 'images/image1.png',
-                            desc: 'Field-proven precision automatic level featuring a highly reliable compensator and superior telescope focus.',
-                            specs: [
-                                'Three magnification models: B20 (32x), B30 (28x), B40 (24x)',
-                                'Precise, field-proven compensator for accurate leveling',
-                                'Horizontal angle measurement with standard graduation',
-                                'Superior telescope with two-speed focus knob',
-                                'Quick collimation with two horizontal motion knobs'
-                            ],
-                            brochure: 'https://www.sokkia.com/sites/default/files/product/downloads/b20-b30-b40_brochure_sok-1025_reva_team_en_us_lores.pdf'
-                        }
-                    ]
-                },
-                {
-                    title: 'Robotic Total Stations',
-                    type: 'products',
-                    products: [
-                        {
-                            name: 'Sokkia iX-1500 / iX-700 Robotic Total Station',
-                            image: 'images/image2.png',
-                            desc: 'High-performance robotic total station featuring ultra-fast tracking technology for high precision layout.',
-                            specs: [
-                                'UltraSonic motor drive with 180°/sec rotation speed',
-                                'UltraSlim body design with large color touch-screen display',
-                                'Integrated RC-5 remote control receiver unit',
-                                'Sokkia TSshield security and tracking cloud system',
-                                'Built-in Bluetooth and wireless communications interface'
-                            ],
-                            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/sokkia_ix-1500_700_sok-1055_engl25data_revc.pdf'
-                        },
-                        {
-                            name: 'Sokkia iX-1200 / iX-600 Robotic Total Station',
-                            image: 'images/image3.png',
-                            desc: 'Precision surveying motor total station offering advanced auto-tracking and layout capability.',
-                            specs: [
-                                'High-reliability UltraSonic motors with direct drive system',
-                                'Dual-axis liquid tilt compensator mechanism',
-                                'Integrated reflectorless EDM measuring up to 800m',
-                                'Sokkia MAGNET Field on-board controller software',
-                                'Robust design with IP65 dust and water protection rating'
-                            ],
-                            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/sokkia_ix-series_sok-1056_engl25broc_reva.pdf'
-                        },
-                        {
-                            name: 'Leica FlexLine TS16 Robotic Total Station',
-                            image: 'images/image4.png',
-                            desc: 'Self-learning robotic total station that adapts dynamically to any environmental condition.',
-                            specs: [
-                                'ARTrending intelligent target search and lock capability',
-                                'Dynamic Lock technology locks onto moving prisms automatically',
-                                'Integrated Leica Captivate field software with 3D views',
-                                'Laser guide pointer for rapid target coordinate alignment',
-                                'PinPoint EDM reflectorless range up to 1,000 meters'
-                            ],
-                            brochure: 'https://leica-geosystems.com/-/media/files/leicageosystems/products/datasheets/leica-ts16/leica%20ts16%20ds%20929657%201120%20en%20lr.pdf?sc_lang=en-in&hash=A006187B045D3BA8532EC8EC5706711E'
-                        },
-                        {
-                            name: 'Leica Nova TS60 MultiStation',
-                            image: 'images/image5.png',
-                            desc: "The world's most accurate total station, designed for the most demanding engineering projects.",
-                            specs: [
-                                'Sub-millimeter angular accuracy (0.5" angular resolution)',
-                                'Dynamic Lock target tracking and ATRplus lock stability',
-                                'Integrated high-resolution telescope and wide-angle cameras',
-                                'Complete integration with Leica Captivate on-board software',
-                                'Engineered for highly precise structural monitoring tasks'
-                            ],
-                            brochure: 'https://leica-geosystems.com/-/media/files/leicageosystems/products/datasheets/leica_nova_ts60_ds.pdf?sc_lang=en-in&hash=662A41553D2B03258825CD33F09E0BB8'
-                        },
-                        {
-                            name: 'Leica Nova TM50 Monitoring Total Station',
-                            image: 'images/image6.png',
-                            desc: 'Automated structural monitoring sensor built for 24/7 continuous operation in harsh environments.',
-                            specs: [
-                                'High-reliability direct piezo motor drives for silent rotation',
-                                'Dual-camera system featuring overview and telescope imaging',
-                                'Long-range EDM measuring up to 3,000m to standard prisms',
-                                'Robust design with full IP65 ingress protection rating',
-                                'Seamlessly integrated with Leica GeoMoS automated software'
-                            ],
-                            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/robotic-total-stations/leica-nova-tm50'
-                        }
-                    ]
-                },
-                {
-                    title: 'Manual Total Stations',
-                    type: 'products',
-                    products: [
-                        {
-                            name: 'Sokkia iM-50 Series Manual Total Station',
-                            image: 'images/image7.png',
-                            desc: 'Compact and lightweight layout tool offering high quality surveying at an entry-level price.',
-                            specs: [
-                                'Fast and accurate reflectorless EDM measuring up to 500m',
-                                'Dual-axis tilt compensation for precise leveling control',
-                                'High-capacity internal memory storing up to 50,000 points',
-                                'Up to 15 hours battery life for continuous field operation',
-                                'Waterproof design with IP66 rugged environmental rating'
-                            ],
-                            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/sokkia_im-50_brochure_sok_1046_reva_sm.pdf'
-                        },
-                        {
-                            name: 'Sokkia iM-100 Series Manual Total Station',
-                            image: 'images/image8.png',
-                            desc: 'Mid-range manual total station designed for high accuracy surveying and layout tasks.',
-                            specs: [
-                                'Powerful EDM measuring up to 800m in reflectorless mode',
-                                'Integrated Bluetooth communications for data collector link',
-                                'Dual display panels with alphanumeric keyboard inputs',
-                                'Bi-directional dual-axis tilt compensator sensor',
-                                'MAGNET Field on-board software option for smart workflows'
-                            ],
-                            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/im-100series_broch_sok-1042_revb_team_en_us_lores.pdf'
-                        },
-                        {
-                            name: 'Sokkia FX Advanced Manual Total Station',
-                            image: 'images/image9.png',
-                            desc: 'Advanced manual total station featuring color touch screen and on-board software integration.',
-                            specs: [
-                                'Windows CE operating system on-board console controller',
-                                'MAGNET Field data collection software pre-installed',
-                                'Long-range reflectorless EDM measuring up to 500m',
-                                'TSshield telemetry cloud support security system',
-                                'Built-in Bluetooth and flash storage card interfaces'
-                            ],
-                            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/fx-200_manualtotalstation_broch_sok-1052_reva_team_en_us_lores_2.pdf'
-                        },
-                        {
-                            name: 'Leica FlexLine TS10 Manual Total Station',
-                            image: 'images/image10.png',
-                            desc: 'High-end manual total station with a large color display and Leica Captivate field software.',
-                            specs: [
-                                'Integrated Leica Captivate software with 3D viewer',
-                                'AutoHeight auto-sensor measures instrument height instantly',
-                                'Reflectorless range up to 1,000m with PinPoint EDM',
-                                'Large high-resolution color touchscreen interface panel',
-                                'Mobile data network module option for office synchronization'
-                            ],
-                            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/manual-total-stations/leica-flexline-ts10'
-                        },
-                        {
-                            name: 'Leica FlexLine TS03 Manual Total Station',
-                            image: 'images/image11.png',
-                            desc: 'Classic manual total station designed for standard, high-reliability daily surveying tasks.',
-                            specs: [
-                                'User-friendly Leica FlexField on-board workflow software',
-                                'Highly precise angular and distance measurements accuracy',
-                                'Reflectorless measurement range up to 500m with EDM',
-                                'Robust design with high resistance to water and dust',
-                                'Large internal memory storage for survey data points'
-                            ],
-                            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/manual-total-stations/leica-flexline-ts03'
-                        },
-                        {
-                            name: 'Leica FlexLine TS07 Manual Total Station',
-                            image: 'images/image12.png',
-                            desc: 'Professional manual total station featuring AutoHeight and color touch screen capabilities.',
-                            specs: [
-                                'AutoHeight auto-laser measurement of instrument height',
-                                'Leica FlexField software with intuitive menu layouts',
-                                'Full color touchscreen display console with keyboard',
-                                'PinPoint EDM reflectorless measuring range up to 1,000m',
-                                'Wireless connectivity option with built-in Bluetooth'
-                            ],
-                            brochure: 'https://leica-geosystems.com/-/media/files/leicageosystems/products/datasheets/leica%20flexline%20ts07%200221%20en-in%20lr.pdf?sc_lang=en-in&hash=1B27FF238DB1E23ACB2FB16E13246299'
-                        },
-                        {
-                            name: 'Leica TS01 Manual Total Station',
-                            image: 'images/image13.png',
-                            desc: 'Entry-level manual total station designed for construction layout and basic surveying.',
-                            specs: [
-                                'Simple and intuitive keyboard interface design layout',
-                                'Fast and accurate distance measurements with EDM tracker',
-                                'Reflectorless measurement capability up to 500m',
-                                'Long operational battery life for full day assignments',
-                                'Rugged build quality certified for active worksites'
-                            ],
-                            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/manual-total-stations/leica-ts01'
-                        },
-                        {
-                            name: 'Sokkia NET AXII 3D Monitoring Station',
-                            image: 'images/image14.jpeg',
-                            desc: 'Ultra-precise 3D monitoring station designed for structural and engineering deformations monitoring.',
-                            specs: [
-                                'Ultra-precise angular measurement (0.5" or 1" models)',
-                                'Auto-collimation tracking with intelligent target search',
-                                'Highly precise distance accuracy (0.5mm + 1ppm to prism)',
-                                'Reflectorless EDM optimized for structural scanning tasks',
-                                'IP65 dust and water ingress protection rating standard'
-                            ],
-                            brochure: 'https://us.sokkia.com/sites/default/files/product/downloads/net-axiiseries_3dmonitoringstations_broch_sok-1002_reve_team_en_us_lores.pdf'
-                        },
-                        {
-                            name: 'Leica Nova MS60 MultiStation',
-                            image: 'images/image15.png',
-                            desc: 'All-in-one scanning total station integrating 3D laser scanning, imaging, and GNSS.',
-                            specs: [
-                                '3D laser scanning speeds up to 30,000 Hz frequencies',
-                                'Highly precise ATRplus automatic prism tracking system',
-                                'Integrated overview and telescope digital camera system',
-                                'Full integration with Leica Captivate 3D field apps',
-                                'Designed for rapid scanning, layout, and structural checks'
-                            ],
-                            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/multistations/leica-nova-ms60'
-                        }
-                    ]
-                }
-            ],
-            items: [
-                'GNSS Receivers',
-                'RTK Systems',
-                'DGPS Solutions',
-                'Survey Equipment',
-                'GIS Integration',
-                'Mobile Mapping Solutions',
-                'Drone Survey Solutions',
-                'CORS Infrastructure',
-                'Land Records Modernization Solutions',
-                'Precision Agriculture Technologies',
-                'Utility Mapping & Asset Management'
-            ]
-        },
-        defense: {
-            title: 'Defense & Aerospace Technologies',
-            desc: 'We provide mission-critical technologies and specialized engineering solutions that support defense, aerospace, homeland security, and strategic infrastructure applications.',
-            itemsTitle: 'Capabilities:',
-            hasProducts: true,
-            tabs: [
-                {
-                    title: 'Overview',
-                    type: 'overview'
-                },
-                {
-                    title: 'Strategic Components',
-                    type: 'products',
-                    products: [
-                        {
-                            name: 'Tactical GNSS & Inertial Navigation Module',
-                            image: 'images/image16.jpeg',
-                            desc: 'Rugged military-grade positioning module combining high-sensitivity multi-constellation GNSS with inertial sensors.',
-                            specs: [
-                                'Tactical-grade MEMS IMU sensor integration',
-                                'Jamming and spoofing mitigation algorithms',
-                                'Dual-frequency L1/L2 multi-constellation support',
-                                'Ruggedized enclosure meeting MIL-STD-810H standards',
-                                'High-speed serial and Ethernet interface connections'
-                            ],
-                            brochure: '#contact'
-                        },
-                        {
-                            name: 'High-Reliability Defense Telemetry Unit',
-                            image: 'images/image17.jpeg',
-                            desc: 'Mission-critical data telemetry processor engineered for real-time sensor processing and strategic communications.',
-                            specs: [
-                                'High-speed DSP processor core architecture',
-                                'Multiple analog and digital signal input channels',
-                                'Low latency data encoding and transmission protocols',
-                                'Operational temperature range of -40°C to +85°C',
-                                'EMI/EMC shielded enclosure for strategic systems'
-                            ],
-                            brochure: '#contact'
-                        },
-                        {
-                            name: 'Military Timing & Frequency Distribution Server',
-                            image: 'images/image18.jpeg',
-                            desc: 'Ultra-precise synchronization server distributing microsecond-accurate timing across defense networks.',
-                            specs: [
-                                'Rubidium atomic frequency standard core reference',
-                                'NTP, PTP, IRIG-B, and PPS output synchronization interfaces',
-                                'High-stability holdover performance during GPS signal loss',
-                                'Dual-redundant power supply inputs configuration',
-                                'Designed for military communications and radar command grids'
-                            ],
-                            brochure: '#contact'
-                        }
-                    ]
-                }
-            ],
-            items: [
-                'Defense Electronics',
-                'Timing & Synchronization Systems',
-                'Navigation Solutions',
-                'Tactical Communication Support Systems',
-                'Sensor Integration',
-                'Ground Control Systems',
-                'Military Grade Positioning Solutions',
-                'Test & Measurement Systems',
-                'Mission-Critical Monitoring Systems'
-            ]
-        },
-        pnt: {
-            title: 'Positioning, Navigation & Timing (PNT)',
-            desc: 'Accurate Positioning, Navigation, and Timing form the backbone of modern defense and infrastructure systems.',
-            itemsTitle: 'Offerings:',
-            isNested: true,
-            categories: [
-                {
-                    name: 'Multi-Constellation GNSS Solutions',
-                    items: [
-                        'GPS / GLONASS / Galileo / BeiDou Systems'
-                    ]
-                },
-                {
-                    name: 'Precision Timing Solutions',
-                    items: [
-                        'NTP/PTP Time Synchronization',
-                        'Timing Servers',
-                        'Frequency Standards',
-                        'Network Synchronization Solutions',
-                        'Critical Infrastructure Timing Systems'
-                    ]
-                }
-            ]
-        },
+    // Non-product verticals data (testing only, since the bento card button remains)
+    const nonProductData = {
         testing: {
             title: 'Defense Testing & Monitoring Products',
             desc: 'Drawing from extensive experience in industrial and defense environments, Terranex provides advanced testing, monitoring, and instrumentation solutions.',
@@ -639,242 +843,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 }
             ]
-        },
-        agriculture: {
-            title: 'Precision Agriculture',
-            desc: 'High-performance agricultural guidance and steering systems integrating advanced RTK positioning and automated path navigation.',
-            itemsTitle: 'Systems Include:',
-            hasProducts: true,
-            tabs: [
-                {
-                    title: 'Overview',
-                    type: 'overview'
-                },
-                {
-                    title: 'Auto-Steer Systems',
-                    type: 'products',
-                    products: [
-                        {
-                            name: 'FJD AT2 Auto-Steer System',
-                            image: 'images/image19.png',
-                            desc: 'Automated steering solution combining GNSS navigation with electric steering wheel control for tractors.',
-                            specs: [
-                                'High precision steering accuracy within +/- 2.5cm',
-                                'Easy installation on a wide range of tractor models',
-                                'Full steering automation reduces operator fatigue',
-                                'Touch screen display console showing live operations map',
-                                'Built-in terrain compensation sensor algorithms'
-                            ],
-                            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-auto-steer-system'
-                        },
-                        {
-                            name: 'FJD AT2 Ultra Auto-Steer System',
-                            image: 'images/image20.png',
-                            desc: 'Ultra-precision agricultural guidance solution featuring RTK positioning and advanced path planning.',
-                            specs: [
-                                'Premium RTK positioning system accuracy',
-                                'Support for complex curved and spiral field paths',
-                                'Automatic headland turns capability automation',
-                                'Integrates with smart implements via ISOBUS interface',
-                                'Cloud platform link for digital farm job records'
-                            ],
-                            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-auto-steer-system'
-                        },
-                        {
-                            name: 'FJD AT2 Max Auto-Steer System',
-                            image: 'images/image21.png',
-                            desc: 'Top-tier autosteer navigation kit designed for large-scale operations requiring maximum uptime.',
-                            specs: [
-                                'Dual-antenna RTK receiver setup for heading stability',
-                                'High-torque electric steering wheel motor',
-                                'Real-time visual monitoring via crop guidance camera',
-                                'Rugged hardware constructed for tough field environments',
-                                'Lifetime support for software updates and map tools'
-                            ],
-                            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-max-auto-steer-system'
-                        },
-                        {
-                            name: 'FJD AT2 Lite Auto-Steer System',
-                            image: 'images/image22.png',
-                            desc: 'Entry-level guidance autosteer system for small farms looking to introduce smart farming.',
-                            specs: [
-                                'Sub-meter coordinate positioning accuracy guidance',
-                                'Simplified setup console wizard for fast deployment',
-                                'Manual driving assist modes with guidance lines',
-                                'Cost-effective system that saves seed, fuel, and time',
-                                'Option to upgrade easily to RTK accuracy later'
-                            ],
-                            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at2-lite-auto-steer-system'
-                        },
-                        {
-                            name: 'FJD AT1 Autosteering Kit',
-                            image: 'images/image23.png',
-                            desc: 'Field-proven robust steering kit providing high reliability and coordinate lock on the path.',
-                            specs: [
-                                'High reliability hydraulic or electric steering options',
-                                'Maintains precise path accuracy even in dust and fog',
-                                'Intuitive control application interface layout',
-                                'Durable sensors designed for heavy duty machines',
-                                'Multi-language terminal guidance support options'
-                            ],
-                            brochure: 'https://agriculture.fjdynamics.com/products/fjd-at1-autosteering-kit'
-                        }
-                    ]
-                }
-            ],
-            items: [
-                'FJD AT2 Auto-Steer System',
-                'FJD AT2 Ultra Auto-Steer System',
-                'FJD AT2 Max Auto-Steer System',
-                'FJD AT2 Lite Auto-Steer System',
-                'FJD AT1 Autosteering Kit',
-                'RTK Base Station Integration',
-                'ISOBUS Implement Control',
-                'Headland Turn Automation',
-                'Terrain Compensation Navigation'
-            ]
         }
     };
 
     verticalBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const verticalKey = btn.getAttribute('data-vertical');
-            const data = capabilitiesData[verticalKey];
+            const data = nonProductData[verticalKey];
 
             if (data) {
-                // Determine if we need a large layout for products
                 const modalWrapper = modal.querySelector('.modal-card');
-                if (data.hasProducts) {
-                    modalWrapper.classList.add('modal-large');
-                } else {
-                    modalWrapper.classList.remove('modal-large');
-                }
+                modalWrapper.classList.remove('modal-large');
 
-                let bodyHtml = '';
-
-                if (data.hasProducts) {
-                    // Render tabbed product view
-                    const tabsHtml = data.tabs.map((tab, idx) => `
-                        <button class="modal-tab-btn ${idx === 0 ? 'active' : ''}" data-modal-tab="${verticalKey}-${idx}">
-                            ${tab.title}
-                        </button>
-                    `).join('');
-
-                    const tabPanesHtml = data.tabs.map((tab, idx) => {
-                        let paneContent = '';
-                        if (tab.type === 'overview') {
-                            paneContent = `
-                                <p class="body-text" style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6;">${data.desc}</p>
-                                <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: #ffffff; margin-bottom: 12px; border-left: 2px solid var(--color-cyan); padding-left: 8px;">${data.itemsTitle}</h4>
-                                <ul class="modal-list" style="grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                                    ${data.items.map(item => `<li>${item}</li>`).join('')}
-                                </ul>
-                            `;
-                        } else if (tab.type === 'products') {
-                            paneContent = `
-                                <div class="product-grid">
-                                    ${tab.products.map(prod => `
-                                        <div class="product-card">
-                                            <div class="product-img-container">
-                                                <img src="${prod.image}" alt="${prod.name}" class="product-img" onerror="this.src='images/image1.png'">
-                                            </div>
-                                            <div class="product-info">
-                                                <h4 class="product-name">${prod.name}</h4>
-                                                <p class="product-desc">${prod.desc}</p>
-                                                <ul class="product-specs">
-                                                    ${prod.specs.map(spec => `
-                                                        <li><i class="fas fa-circle-check"></i> <span>${spec}</span></li>
-                                                    `).join('')}
-                                                </ul>
-                                            </div>
-                                            <div class="product-actions">
-                                                <a href="${prod.brochure}" target="_blank" class="btn-brochure">
-                                                    <i class="fas fa-file-pdf"></i>
-                                                    <span>Download Brochure</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            `;
-                        }
-
-                        return `
-                            <div class="modal-tab-pane ${idx === 0 ? 'active' : ''}" id="pane-${verticalKey}-${idx}" style="${idx === 0 ? 'display: block;' : 'display: none;'}">
-                                ${paneContent}
-                            </div>
-                        `;
-                    }).join('');
-
-                    bodyHtml = `
-                        <div class="modal-content-details">
-                            <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: #ffffff; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">${data.title}</h3>
-                            <div class="modal-tabs">
-                                ${tabsHtml}
-                            </div>
-                            <div class="modal-tab-panes" style="max-height: 65vh; overflow-y: auto; padding-right: 8px;">
-                                ${tabPanesHtml}
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    // Standard non-product layout
-                    let itemsHtml = '';
-                    if (data.isNested) {
-                        itemsHtml = data.categories.map(cat => `
-                            <div class="modal-category" style="margin-bottom: 16px;">
-                                <h4 class="modal-cat-title" style="color: var(--color-cyan); margin-top: 16px; margin-bottom: 8px; font-family: var(--font-heading); font-size: 0.95rem; border-left: 2px solid var(--color-cyan); padding-left: 8px; text-transform: uppercase; letter-spacing: 0.05em;">${cat.name}</h4>
-                                <ul class="modal-list" style="grid-template-columns: 1fr; gap: 6px;">
-                                    ${cat.items.map(item => `<li>${item}</li>`).join('')}
-                                </ul>
-                            </div>
-                        `).join('');
-                    } else {
-                        itemsHtml = `
-                            <ul class="modal-list" style="margin-top: 12px;">
-                                ${data.items.map(item => `<li>${item}</li>`).join('')}
+                let itemsHtml = '';
+                if (data.isNested) {
+                    itemsHtml = data.categories.map(cat => `
+                        <div class="modal-category" style="margin-bottom: 16px;">
+                            <h4 class="modal-cat-title" style="color: var(--color-cyan); margin-top: 16px; margin-bottom: 8px; font-family: var(--font-heading); font-size: 0.95rem; border-left: 2px solid var(--color-cyan); padding-left: 8px; text-transform: uppercase; letter-spacing: 0.05em;">${cat.name}</h4>
+                            <ul class="modal-list" style="grid-template-columns: 1fr; gap: 6px;">
+                                ${cat.items.map(item => `<li>${item}</li>`).join('')}
                             </ul>
-                        `;
-                    }
-
-                    bodyHtml = `
-                        <div class="modal-content-details" style="max-height: 75vh; overflow-y: auto; padding-right: 12px;">
-                            <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: #ffffff; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">${data.title}</h3>
-                            <p class="body-text" style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">${data.desc}</p>
-                            <h4 style="font-family: var(--font-heading); font-size: 1.05rem; color: #ffffff; margin-bottom: 4px;">${data.itemsTitle}</h4>
-                            ${itemsHtml}
                         </div>
-                    `;
+                    `).join('');
                 }
 
-                modalContent.innerHTML = bodyHtml;
+                modalContent.innerHTML = `
+                    <div class="modal-content-details" style="max-height: 75vh; overflow-y: auto; padding-right: 12px;">
+                        <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: #ffffff; margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">${data.title}</h3>
+                        <p class="body-text" style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;">${data.desc}</p>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.05rem; color: #ffffff; margin-bottom: 4px;">${data.itemsTitle}</h4>
+                        ${itemsHtml}
+                    </div>
+                `;
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Lock body scroll
-
-                // Setup tab listeners inside the modal if tabbed
-                if (data.hasProducts) {
-                    const tabButtons = modal.querySelectorAll('.modal-tab-btn');
-                    const tabPanes = modal.querySelectorAll('.modal-tab-pane');
-
-                    tabButtons.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const targetPaneId = 'pane-' + btn.getAttribute('data-modal-tab');
-                            
-                            tabButtons.forEach(b => b.classList.remove('active'));
-                            tabPanes.forEach(p => {
-                                p.classList.remove('active');
-                                p.style.display = 'none';
-                            });
-
-                            btn.classList.add('active');
-                            const targetPane = modal.querySelector('#' + targetPaneId);
-                            if (targetPane) {
-                                targetPane.classList.add('active');
-                                targetPane.style.display = 'block';
-                            }
-                        });
-                    });
-                }
+                document.body.style.overflow = 'hidden';
             }
         });
     });
