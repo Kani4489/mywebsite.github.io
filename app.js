@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         menuToggle.classList.toggle('active');
-        
+
         // Animated hamburger
         const bars = menuToggle.querySelectorAll('.bar');
         if (navMenu.classList.contains('active')) {
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const heroCanvas = document.getElementById('hero-canvas');
     const heroCtx = heroCanvas.getContext('2d');
-    
+
     let width = (heroCanvas.width = heroCanvas.offsetWidth);
     let height = (heroCanvas.height = heroCanvas.offsetHeight);
-    
+
     const particles = [];
     const maxParticles = window.innerWidth < 768 ? 40 : 80;
     const connectionDist = 120;
-    
+
     let mouse = { x: null, y: null, radius: 150 };
 
     window.addEventListener('resize', () => {
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: 'Sokkia NET AXII 3D Monitoring Station',
-            image: 'images/image14.jpeg',
+            image: 'images/image14.png',
             desc: 'Ultra-precise 3D monitoring station designed for structural and engineering deformations monitoring.',
             category: 'manual-total-stations',
             categoryLabel: 'Monitoring Station',
@@ -925,7 +925,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ------------------------------------------
     const satCanvas = document.getElementById('satellite-orbit-canvas');
     const satCtx = satCanvas.getContext('2d');
-    
+
     // Satellites parameters
     let satWidth = 0;
     let satHeight = 0;
@@ -969,10 +969,10 @@ document.addEventListener('DOMContentLoaded', () => {
     constSelect.addEventListener('change', (e) => {
         constellationType = e.target.value;
         const config = satellitesData[constellationType];
-        
+
         document.getElementById('sat-count').textContent = config.count;
         document.getElementById('hdop-val').textContent = config.hdop.toFixed(2);
-        
+
         // Color status based on DOP quality
         const hdopValEl = document.getElementById('hdop-val');
         if (config.hdop < 1.0) {
@@ -1002,7 +1002,7 @@ document.addEventListener('DOMContentLoaded', () => {
         satCtx.lineWidth = 2;
         satCtx.fill();
         satCtx.stroke();
-        
+
         // Draw Receiver Core Dot
         satCtx.beginPath();
         satCtx.arc(cx, cy, 4, 0, Math.PI * 2);
@@ -1020,7 +1020,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Get current satellites array
         const currentConfig = satellitesData[constellationType];
-        
+
         satAngle += 0.01;
 
         currentConfig.sats.forEach(sat => {
@@ -1052,7 +1052,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Math.random() < 0.15) {
             const latJitter = (Math.random() - 0.5) * 0.005;
             const lonJitter = (Math.random() - 0.5) * 0.005;
-            
+
             // Just small display jitter values
             document.getElementById('lat-val').textContent = `12° 58' ${(23.15 + latJitter).toFixed(2)}" N`;
             document.getElementById('lon-val').textContent = `80° 14' ${(56.42 + lonJitter).toFixed(2)}" E`;
@@ -1083,9 +1083,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const secs = String(d.getSeconds()).padStart(2, '0');
         const ms = String(d.getMilliseconds()).padStart(3, '0');
         const ns = String(Math.floor(Math.random() * 999999)).padStart(6, '0');
-        
+
         masterClockEl.textContent = `${hrs}:${mins}:${secs}.${ms}${ns}`;
-        
+
         // Jitter clock offset display
         const offset = Math.floor(Math.random() * 6) + 3; // 3 to 8 ns
         clockOffsetEl.textContent = `< ${offset} ns`;
@@ -1096,11 +1096,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function addLogLine(text, type = '') {
         const d = new Date();
         const timestamp = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}.${String(d.getMilliseconds()).padStart(3, '0')}`;
-        
+
         const logLine = document.createElement('div');
         logLine.className = 'log-line';
         logLine.innerHTML = `<span class="log-time">[${timestamp}]</span> <span class="log-text ${type}">${text}</span>`;
-        
+
         logConsole.appendChild(logLine);
         logConsole.scrollTop = logConsole.scrollHeight;
 
@@ -1195,7 +1195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sondePressEl.textContent = `${currentPress} hPa`;
 
         // 3. Humidity changes dynamically
-        const currentHum = Math.max(10, Math.floor(68 - (sondeAltitude / 400) + Math.sin(sondeAltitude/100)*10));
+        const currentHum = Math.max(10, Math.floor(68 - (sondeAltitude / 400) + Math.sin(sondeAltitude / 100) * 10));
         sondeHumEl.textContent = `${currentHum} %`;
 
         // Update graphic position in container
@@ -1211,7 +1211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     launchSondeBtn.addEventListener('click', () => {
         if (sondeRunning) return;
-        
+
         resetSonde();
         sondeRunning = true;
         launchSondeBtn.textContent = 'Ascending...';
@@ -1236,7 +1236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nameInput = document.getElementById('form-name');
         const emailInput = document.getElementById('form-email');
         const msgInput = document.getElementById('form-message');
-        
+
         let isValid = true;
 
         // Validate Name
@@ -1268,19 +1268,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // Simulated secure encryption delay
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnContent = submitBtn.innerHTML;
-            
+
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span>Encrypting & Sending...</span> <i class="fas fa-lock animate-pulse"></i>';
 
             setTimeout(() => {
                 submitBtn.style.display = 'none';
                 successBox.style.display = 'flex';
-                
+
                 // Form cleanup
                 nameInput.value = '';
                 emailInput.value = '';
                 msgInput.value = '';
-                
+
                 // Print secure contact log in console widget
                 addLogLine('SECURE LINK: Received encrypted inquiry payload from corporate interface.', 'success');
             }, 1200);
