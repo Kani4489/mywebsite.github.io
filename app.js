@@ -538,51 +538,104 @@ document.addEventListener('DOMContentLoaded', () => {
             brochure: 'https://leica-geosystems.com/products/total-stations/multistation/leica-nova-ms60'
         },
         // === Defense Components ===
+        // {
+        //     name: 'Tactical GNSS & Inertial Navigation Module',
+        //     image: 'images/image16.jpeg',
+        //     desc: 'Rugged military-grade positioning module combining high-sensitivity multi-constellation GNSS with inertial sensors.',
+        //     category: 'defense-components',
+        //     categoryLabel: 'Defense System',
+        //     specs: [
+        //         'Tactical-grade MEMS IMU sensor integration',
+        //         'Jamming and spoofing mitigation algorithms',
+        //         'Dual-frequency L1/L2 multi-constellation support',
+        //         'Ruggedized enclosure meeting MIL-STD-810H standards',
+        //         'High-speed serial and Ethernet interface connections'
+        //     ],
+        //     brochure: '#contact'
+        // },
         {
-            name: 'Tactical GNSS & Inertial Navigation Module',
-            image: 'images/image16.jpeg',
-            desc: 'Rugged military-grade positioning module combining high-sensitivity multi-constellation GNSS with inertial sensors.',
+            name: 'GPS Based Pilotsonde T-PS-300',
+            image: 'images/image18-1.jpg',
+            desc: 'An affordable, GPS-based sonde dedicated to high-quality wind profile measurement, providing automatic and accurate data for wind direction, speed, pressure, and altitude.',
             category: 'defense-components',
             categoryLabel: 'Defense System',
             specs: [
-                'Tactical-grade MEMS IMU sensor integration',
-                'Jamming and spoofing mitigation algorithms',
-                'Dual-frequency L1/L2 multi-constellation support',
-                'Ruggedized enclosure meeting MIL-STD-810H standards',
-                'High-speed serial and Ethernet interface connections'
+                'High-altitude operation up to 30 km',
+                'Differential GPS method for wind finding',
+                'Real-time data display and automatic recording',
+                'Lightweight design (≤90g including batteries)',
+                'USB-powered ground receiver for field deployment',
+                'Programmable frequency (400.15 MHz to 406 MHz)',
+                'Integrated 3.6V Li-Thionyle chloride battery'
             ],
-            brochure: '#contact'
+            brochure: 'https://sertelelectronics.com/wp-content/uploads/2023/03/Sertel_Pilotsonde.pdf'
         },
         {
-            name: 'High-Reliability Defense Telemetry Unit',
-            image: 'images/image17.jpeg',
-            desc: 'Mission-critical data telemetry processor engineered for real-time sensor processing and strategic communications.',
+            name: 'Radiosonde T-RS-300',
+            image: 'images/image17-1.jpg',
+            desc: 'A battery-powered telemetry device designed for balloon-borne atmospheric profiling, featuring high-accuracy sensors for pressure, temperature, humidity, and GPS-based wind/altitude measurement.',
             category: 'defense-components',
             categoryLabel: 'Defense System',
             specs: [
-                'High-speed DSP processor core architecture',
-                'Multiple analog and digital signal input channels',
-                'Low latency data encoding and transmission protocols',
-                'Operational temperature range of -40°C to +85°C',
-                'EMI/EMC shielded enclosure for strategic systems'
+                'High-stability platinum resistor temperature sensor',
+                'Thin-film capacitor humidity sensor with preflight reconditioning',
+                'Shock-resistant capacitive silicon pressure sensor',
+                'GPS-based wind finding (accuracy: 0.2m/s for speed, 1° for direction)',
+                'Long-range data transmission up to 200 km',
+                'Compact, lightweight design (<180g)',
+                'Powered by 3.7V Lithium Thionyl Chloride battery'
             ],
-            brochure: '#contact'
+            brochure: 'https://sertelelectronics.com/wp-content/uploads/2023/03/Sertel_Radiosonde.pdf'
         },
+
         {
-            name: 'Military Timing & Frequency Distribution Server',
-            image: 'images/image18.jpeg',
-            desc: 'Ultra-precise synchronization server distributing microsecond-accurate timing across defense networks.',
+            name: 'Automatic Weather Station T-AWS-300',
+            image: 'images/image16-1.jpg',
+            desc: 'A compact, modular, and rugged meteorological monitoring system featuring a data logger with GPS time synchronization, versatile sensor interfaces, and reliable remote data transmission capabilities.',
             category: 'defense-components',
             categoryLabel: 'Defense System',
+
             specs: [
-                'Rubidium atomic frequency standard core reference',
-                'NTP, PTP, IRIG-B, and PPS output synchronization interfaces',
-                'High-stability holdover performance during GPS signal loss',
-                'Dual-redundant power supply inputs configuration',
-                'Designed for military communications and radar command grids'
+                'High-accuracy measurement of temperature, humidity, pressure, wind (ultrasonic), and solar radiation',
+                '8 sensor channels with independent power control',
+                'Integrated GSM/GPRS/CDMA modem for remote data transmission',
+                'GPS-synchronized real-time clock for precise data logging',
+                'Solar-powered operation with 12V SMF battery backup',
+                'NEMA-4 weatherproof enclosure with MIL-C-5015 grade connectors',
+                '1-year local data storage with detachable USB backup support'
             ],
-            brochure: '#contact'
+            brochure: 'https://sertelelectronics.com/wp-content/uploads/2023/03/Automatic-Weather-StationAWS.pdf'
         },
+        // {
+        //     name: 'High-Reliability Defense Telemetry Unit',
+        //     image: 'images/image17.jpeg',
+        //     desc: 'Mission-critical data telemetry processor engineered for real-time sensor processing and strategic communications.',
+        //     category: 'defense-components',
+        //     categoryLabel: 'Defense System',
+        //     specs: [
+        //         'High-speed DSP processor core architecture',
+        //         'Multiple analog and digital signal input channels',
+        //         'Low latency data encoding and transmission protocols',
+        //         'Operational temperature range of -40°C to +85°C',
+        //         'EMI/EMC shielded enclosure for strategic systems'
+        //     ],
+        //     brochure: '#contact'
+        // },
+        // {
+        //     name: 'Military Timing & Frequency Distribution Server',
+        //     image: 'images/image18.jpeg',
+        //     desc: 'Ultra-precise synchronization server distributing microsecond-accurate timing across defense networks.',
+        //     category: 'defense-components',
+        //     categoryLabel: 'Defense System',
+        //     specs: [
+        //         'Rubidium atomic frequency standard core reference',
+        //         'NTP, PTP, IRIG-B, and PPS output synchronization interfaces',
+        //         'High-stability holdover performance during GPS signal loss',
+        //         'Dual-redundant power supply inputs configuration',
+        //         'Designed for military communications and radar command grids'
+        //     ],
+        //     brochure: '#contact'
+        // },
         // === Auto-Steer Systems ===
         {
             name: 'FJD AT2 Auto-Steer System',
