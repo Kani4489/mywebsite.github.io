@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Full integration with Leica Captivate 3D field apps',
                 'Designed for rapid scanning, layout, and structural checks'
             ],
-            brochure: 'https://leica-geosystems.com/en-in/products/total-stations/multistations/leica-nova-ms60'
+            brochure: 'https://leica-geosystems.com/products/total-stations/multistation/leica-nova-ms60'
         },
         // === Defense Components ===
         {
