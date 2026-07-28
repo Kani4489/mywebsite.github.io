@@ -711,6 +711,128 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Multi-language terminal guidance support options'
             ],
             brochure: 'https://agriculture.fjdynamics.com/products/fjd-at1-autosteering-kit'
+        }, {
+            "name": "EyeROV TUNA Remotely Operated Vehicle (ROV)",
+            "image": "images/image1.png",
+            "desc": "High-performance observation-class ROV built for shallow to mid-depth underwater exploration with advanced payload support and autonomous navigation.",
+            "category": "hydro-products",
+            "categoryLabel": "Hydro Product",
+            "specs": [
+                "Depth Rating: 100m",
+                "Speed: 2 knots",
+                "Camera: 4K Camera with 10x Zoom",
+                "Lighting: 3000-Lumen LED Lights",
+                "Tether: 75m Neutrally Buoyant Tether"
+            ],
+            "brochure": "/brochure/EyeROV-Bridge-Inspection.pdf"
+        },
+        {
+            "name": "EyeROV SAGARA Remotely Operated Vehicle (ROV)",
+            "image": "images/image2.png",
+            "desc": "Heavy-duty Remotely Operated Vehicle built for deeper subsea operations, featuring a robust build supporting greater depth capacity, dual-camera systems, and higher payload weights.",
+            "category": "hydro-products",
+            "categoryLabel": "Hydro Product",
+            "specs": [
+                "Dimension: 890 x 510 x 390 mm[cite: 1]",
+                "Weight: 40 Kg (In Air)[cite: 1]",
+                "Speed: up to 3 Knots[cite: 1]",
+                "Endurance: External Power[cite: 1]",
+                "Depth Rating: Upto 300 m[cite: 1]"
+            ],
+            "brochure": "/brochure/EyeROV-Bridge-Inspection.pdf"
+        },
+        {
+            "name": "i-Boat Alpha Autonomous Surface Vessel (ASV)",
+            "image": "images/image3.png",
+            "desc": "Unmanned surface vessel designed for surface-level marine research, environmental monitoring, sample collection, and aquatic surveys in dynamic marine conditions.",
+            "category": "hydro-products",
+            "categoryLabel": "Hydro Product",
+            "specs": [
+                "Dimension: 1050 x 860 x 860 mm[cite: 1]",
+                "Weight: 30 kg[cite: 1]",
+                "Speed: up to 6 Knots[cite: 1]",
+                "Endurance: 2 to 3 hrs[cite: 1]",
+                "Top Speed: 4-6 knots[cite: 2]"
+            ],
+            "brochure": "/brochure/iBoat-Alpha-USV.pdf"
+        },
+        {
+            "name": "EyeROV TROUT Military-Grade ROV",
+            "image": "images/image4.png",
+            "desc": "Military-grade ROV engineered for deep-sea missions with advanced payload capabilities, autonomous navigation, and high-resolution imaging.",
+            "category": "hydro-products",
+            "categoryLabel": "Hydro Product",
+            "specs": [
+                "Depth Rating: 300m[cite: 5]",
+                "Autonomous Navigation[cite: 5]",
+                "4K camera with 10x optical zoom[cite: 5]",
+                "Speed Above 3 knots[cite: 5]",
+                "Payload Capacity: 4 kg[cite: 5]"
+            ],
+            "brochure": "/brochure/EyeROV-TROUT ROV.pdf"
+        },
+        {
+            "name": "EyeROV TUNA PRO - ETP 3000",
+            "image": "images/image5.png",
+            "desc": "High-performance modular variant of the TUNA ROV fleet equipped with high-performance onboard computers, optimized 5-thruster configuration, and intuitive control console.",
+            "category": "hydro-products",
+            "categoryLabel": "Hydro Product",
+            "specs": [
+                "Depth Rating: Up to 300 m",
+                "Speed: Up to 2 knots (In still water)",
+                "Dimensions: 500 x 365 x 515 mm",
+                "Weight: 22 kg (Air)",
+                "Payload Capacity: 2 kg with 20 x 20 x 20 cm space"
+            ],
+            "brochure": "/brochure/EyeROV-TUNA-Pro-ROV.pdf"
+        },
+        {
+            "name": "Surveypod V1",
+            "image": "images/image1.png",
+            "desc": "Differential GNSS System featuring high precision accuracy, 184 tracking channels, and an endurance of up to 16 hours.",
+            "category": "drone-products",
+            "categoryLabel": "Drone Product",
+            "specs": [
+                "Real-Time Kinematics Accuracy: H: 7mm | V: 14mm[cite: 10]",
+                "PPK Mode Accuracy: H: 5mm | V: 8mm[cite: 10]",
+                "Static Mode Accuracy: H: 4mm | V: 6mm[cite: 10]",
+                "Tracking Channels: 184 Channels[cite: 10]",
+                "Weight: 1150 gm[cite: 10]",
+                "IP Rating: IP67[cite: 10]"
+            ],
+            "brochure": "/brochure/Surveyaan_v1_plus.pdf"
+        },
+        {
+            "name": "Surveyaan V1 Pro",
+            "image": "images/image3.png",
+            "desc": "LiDAR Drone Solution featuring an integrated Livox Avia LiDAR scanner, built-in 26 MP calibrated camera, and multi-rotor design.",
+            "category": "drone-products",
+            "categoryLabel": "Drone Product",
+            "specs": [
+                "Aircraft Type: Multi Rotor[cite: 12]",
+                "Flight Time: 40-45 Min with 1Kg of Payload[cite: 12]",
+                "Max Payload: 6Kg[cite: 12]",
+                "Scanner: Integrated Livox Avia LiDAR scanner[cite: 12]",
+                "Camera Resolution: 6252 x 4168[cite: 12]",
+                "Data Storage: 256 GB[cite: 12]"
+            ],
+            "brochure": "/brochure/Surveyaan-V1-Pro.pdf"
+        },
+        {
+            "name": "Surveypod V2",
+            "image": "images/image2.png",
+            "desc": "Advanced GNSS Positioning Engine equipped with 672 channels, 90+ satellite tracking, and 60° tilt compensation.",
+            "category": "drone-products",
+            "categoryLabel": "Drone Product",
+            "specs": [
+                "Tracking Channels: 672 Channels[cite: 11]",
+                "Satellite Tracking: 90+ Satellites[cite: 11]",
+                "Tilt Compensation: 60°[cite: 11]",
+                "Battery Endurance: 16hr Internal Battery[cite: 11]",
+                "Weight: 1150 gm[cite: 11]",
+                "IP Rating: IP-67[cite: 11]"
+            ],
+            "brochure": "/brochure/Surveypod V2 Datasheet.pdf"
         }
     ];
 
@@ -722,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="showcase-product-card scroll-reveal" data-category="${product.category}" style="animation-delay: ${index * 0.06}s">
                 <div class="showcase-img-container">
                     <span class="showcase-category-badge">${product.categoryLabel}</span>
-                    <img src="${product.image}" alt="${product.name}" class="showcase-product-img" loading="lazy" onerror="this.src='images/image1.png'">
+                    <!-- <img src="${product.image}" alt="${product.name}" class="showcase-product-img" loading="lazy" onerror="this.src='images/image1.png'"> -->
                 </div>
                 <div class="showcase-product-info">
                     <h4 class="showcase-product-name">${product.name}</h4>
