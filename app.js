@@ -724,7 +724,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Lighting: 3000-Lumen LED Lights",
                 "Tether: 75m Neutrally Buoyant Tether"
             ],
-            "brochure": "/brochure/EyeROV-Bridge-Inspection.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/EyeROV-Bridge-Inspection.pdf"
         },
         {
             "name": "EyeROV SAGARA Remotely Operated Vehicle (ROV)",
@@ -739,7 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Endurance: External Power[cite: 1]",
                 "Depth Rating: Upto 300 m[cite: 1]"
             ],
-            "brochure": "/brochure/EyeROV-Bridge-Inspection.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/EyeROV-Bridge-Inspection.pdf"
         },
         {
             "name": "i-Boat Alpha Autonomous Surface Vessel (ASV)",
@@ -754,7 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Endurance: 2 to 3 hrs[cite: 1]",
                 "Top Speed: 4-6 knots[cite: 2]"
             ],
-            "brochure": "/brochure/iBoat-Alpha-USV.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/iBoat-Alpha-USV.pdf"
         },
         {
             "name": "EyeROV TROUT Military-Grade ROV",
@@ -769,7 +769,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Speed Above 3 knots[cite: 5]",
                 "Payload Capacity: 4 kg[cite: 5]"
             ],
-            "brochure": "/brochure/EyeROV-TROUT ROV.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/EyeROV-TROUT ROV.pdf"
         },
         {
             "name": "EyeROV TUNA PRO - ETP 3000",
@@ -784,7 +784,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Weight: 22 kg (Air)",
                 "Payload Capacity: 2 kg with 20 x 20 x 20 cm space"
             ],
-            "brochure": "/brochure/EyeROV-TUNA-Pro-ROV.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/EyeROV-TUNA-Pro-ROV.pdf"
         },
         {
             "name": "Surveypod V1",
@@ -800,7 +800,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Weight: 1150 gm[cite: 10]",
                 "IP Rating: IP67[cite: 10]"
             ],
-            "brochure": "/brochure/Surveyaan_v1_plus.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/Surveyaan_v1_plus.pdf"
         },
         {
             "name": "Surveyaan V1 Pro",
@@ -816,7 +816,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Camera Resolution: 6252 x 4168[cite: 12]",
                 "Data Storage: 256 GB[cite: 12]"
             ],
-            "brochure": "/brochure/Surveyaan-V1-Pro.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/Surveyaan-V1-Pro.pdf"
         },
         {
             "name": "Surveypod V2",
@@ -832,7 +832,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Weight: 1150 gm[cite: 11]",
                 "IP Rating: IP-67[cite: 11]"
             ],
-            "brochure": "/brochure/Surveypod V2 Datasheet.pdf"
+            "brochure": "https://kani4489.github.io/mywebsite.github.io/brochure/Surveypod V2 Datasheet.pdf"
         }
     ];
 
