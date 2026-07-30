@@ -1400,8 +1400,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================================
-    // 7. Contact Form Submission & Validation
+    // 7. Contact Form Submission & Validation (EmailJS — Yahoo Mail)
     // ==========================================
+
+    // --- EmailJS Configuration ---
+    // Steps to activate:
+    //  1. Sign up at https://www.emailjs.com (free — 200 emails/month)
+    //  2. Add Email Service → choose "Yahoo Mail" → connect your Yahoo account
+    //  3. Create Email Template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
+    //  4. Copy Service ID, Template ID, and Public Key from EmailJS dashboard into the constants below
+    const EMAILJS_SERVICE_ID = 'service_ouagivn';  // <-- Your EmailJS Service ID
+    const EMAILJS_TEMPLATE_ID = 'template_us7u3km';     // <-- Your EmailJS Template ID
+    const EMAILJS_PUBLIC_KEY = 'PhNl5SvUxanwGChuy';       // <-- Your EmailJS Public Key
+
+    // Initialize EmailJS
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
     const form = document.getElementById('contact-form');
     const successBox = document.getElementById('form-success');
 
@@ -1410,6 +1424,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nameInput = document.getElementById('form-name');
         const emailInput = document.getElementById('form-email');
+        const subjectInput = document.getElementById('form-subject');
         const msgInput = document.getElementById('form-message');
 
         let isValid = true;
@@ -1440,36 +1455,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (isValid) {
-            // Simulated secure encryption delay
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnContent = submitBtn.innerHTML;
 
+            // Show loading / encrypting state
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Encrypting & Sending...</span> <i class="fas fa-lock animate-pulse"></i>';
+            submitBtn.innerHTML = '<span>Encrypting &amp; Sending...</span> <i class="fas fa-lock animate-pulse"></i>';
 
-            setTimeout(() => {
-                submitBtn.style.display = 'none';
-                successBox.style.display = 'flex';
+            // Template parameters — must match your EmailJS template variable names
+            const templateParams = {
+                from_name: nameInput.value.trim(),
+                name: nameInput.value.trim(),
+                from_email: emailInput.value.trim(),
+                subject: subjectInput
+                    ? subjectInput.options[subjectInput.selectedIndex].text
+                    : 'General Inquiry',
+                title: subjectInput
+                    ? subjectInput.options[subjectInput.selectedIndex].text
+                    : 'General Inquiry',
+                message: msgInput.value.trim()
+            };
 
-                // Form cleanup
-                nameInput.value = '';
-                emailInput.value = '';
-                msgInput.value = '';
 
-                // Print secure contact log in console widget
-                addLogLine('SECURE LINK: Received encrypted inquiry payload from corporate interface.', 'success');
-            }, 1200);
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(() => {
+                    // ✅ Success — reveal confirmation box
+                    submitBtn.style.display = 'none';
+                    successBox.style.display = 'flex';
+
+                    // Clear form fields
+                    nameInput.value = '';
+                    emailInput.value = '';
+                    msgInput.value = '';
+
+                    addLogLine('SECURE LINK: Encrypted inquiry payload delivered via Yahoo Mail (EmailJS).', 'success');
+                })
+                .catch((error) => {
+                    // ❌ Failure — restore button and show error banner
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnContent;
+
+                    let errBox = document.getElementById('form-error-notify');
+                    if (!errBox) {
+                        errBox = document.createElement('div');
+                        errBox.id = 'form-error-notify';
+                        errBox.style.cssText = [
+                            'margin-top:12px',
+                            'padding:12px 16px',
+                            'border-radius:8px',
+                            'background:rgba(255,60,60,0.12)',
+                            'border:1px solid rgba(255,60,60,0.35)',
+                            'color:#ff6b6b',
+                            'font-size:0.875rem',
+                            'display:flex',
+                            'align-items:center',
+                            'gap:8px'
+                        ].join(';');
+                        form.appendChild(errBox);
+                    }
+                    errBox.innerHTML = '<i class="fas fa-triangle-exclamation"></i> <span>Failed to send message. Please try again or contact us directly.</span>';
+                    errBox.style.display = 'flex';
+
+                    console.error('EmailJS send error:', error);
+                    addLogLine('SECURE LINK: Email delivery failed. Check EmailJS configuration.', 'error');
+                });
         }
     });
 
-    // Instant validation listener updates on typing
+    // Live validation — clear errors as user types
     const formFields = form.querySelectorAll('input, textarea');
     formFields.forEach(field => {
         field.addEventListener('input', () => {
             if (field.value.trim()) {
                 field.parentElement.classList.remove('invalid');
             }
+            // Hide error notification when user resumes typing
+            const errBox = document.getElementById('form-error-notify');
+            if (errBox) errBox.style.display = 'none';
         });
     });
 
 });
+
