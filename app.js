@@ -1409,7 +1409,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //  2. Add Email Service → choose "Yahoo Mail" → connect your Yahoo account
     //  3. Create Email Template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
     //  4. Copy Service ID, Template ID, and Public Key from EmailJS dashboard into the constants below
-    const EMAILJS_SERVICE_ID = 'service_ouagivn';  // <-- Your EmailJS Service ID
+    const EMAILJS_SERVICE_ID = 'service_lb7m5cd';  // <-- Your EmailJS Service ID
     const EMAILJS_TEMPLATE_ID = 'template_us7u3km';     // <-- Your EmailJS Template ID
     const EMAILJS_PUBLIC_KEY = 'PhNl5SvUxanwGChuy';       // <-- Your EmailJS Public Key
 
